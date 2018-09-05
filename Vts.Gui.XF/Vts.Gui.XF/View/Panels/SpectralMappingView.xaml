@@ -18,7 +18,7 @@
         <StackLayout Orientation="Vertical">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="250" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -30,27 +30,11 @@
                     Grid.Column="0" Grid.Row="0"
                     Text="{Binding TissueTypesLabel}"
                     />-->
-                <Label Grid.Column="0" Grid.Row="0"  Text="Tissue Types:" FontSize="16" />
-                <ListView Grid.Column="0" Grid.Row="1"
+                <Picker Grid.Column="0" Grid.Row="0" Title="Tissue Types:"
                     ItemsSource="{Binding Tissues}"
-                    VerticalOptions="FillAndExpand"
-                    IsPullToRefreshEnabled="true"
-                    CachingStrategy="RecycleElement"
-                    ItemSelected="OnItemSelected"
-                    SelectedItem="{Binding SelectedTissue, Mode=TwoWay}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Padding="2">
-                                    <Label Text="{Binding Name}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="13" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    SelectedItem="{Binding SelectedTissue, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding Name}"
+                    FontSize="13" />
                 <!--<ListView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Height="14">
@@ -63,8 +47,10 @@
                 <!--<Label
                     Grid.Column="2" Grid.Row="0"
                     Text="{Binding AbsorberConcentrationsLabel}" />-->
-                <Label Grid.Column="1" Grid.Row="0"  Text="Absorber Concentrations:" />
-                <ListView Grid.Column="1" Grid.Row="1"
+                <Label Grid.Column="0" Grid.Row="1" 
+                       Text="Absorber Concentrations:"
+                       FontSize="13"/>
+                <ListView Grid.Column="0" Grid.Row="2"
                     ItemsSource="{Binding SelectedTissue.Absorbers}"
                     VerticalOptions="FillAndExpand"
                     IsPullToRefreshEnabled="true"
