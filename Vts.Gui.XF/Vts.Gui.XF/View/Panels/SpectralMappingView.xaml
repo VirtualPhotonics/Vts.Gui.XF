@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Vts.Gui.XF.View.SpectralMappingView"
+             Title="Spectral Panel:">
+    <!--x:Name="BrowseItemsPage"-->
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="UWP" Value="add.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>-->
+
+    <Grid x:Name="LayoutRoot">
+        <StackLayout Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- Tissue Types -->
+                <!--<Label
+                    Grid.Column="0" Grid.Row="0"
+                    Text="{Binding TissueTypesLabel}"
+                    />-->
+                <Label Grid.Column="0" Grid.Row="0"  Text="Tissue Types:" FontSize="16" />
+                <ListView Grid.Column="0" Grid.Row="1"
+                    ItemsSource="{Binding Tissues}"
+                    VerticalOptions="FillAndExpand"
+                    IsPullToRefreshEnabled="true"
+                    CachingStrategy="RecycleElement"
+                    ItemSelected="OnItemSelected"
+                    SelectedItem="{Binding SelectedTissue, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="2">
+                                    <Label Text="{Binding Name}" 
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="13" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Height="14">
+                            <Label Text="{Binding}" FontSize="11" />
+                        </StackLayout>
+                    </DataTemplate>
+                </ListView.ItemTemplate>-->
+            <!--</ListView>-->
+            <!-- Absorber Concentrations -->
+                <!--<Label
+                    Grid.Column="2" Grid.Row="0"
+                    Text="{Binding AbsorberConcentrationsLabel}" />-->
+                <Label Grid.Column="1" Grid.Row="0"  Text="Absorber Concentrations:" />
+                <ListView Grid.Column="1" Grid.Row="1"
+                    ItemsSource="{Binding SelectedTissue.Absorbers}"
+                    VerticalOptions="FillAndExpand"
+                    IsPullToRefreshEnabled="true"
+                    CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="250" />
+                                        <ColumnDefinition Width="200" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Orientation="Horizontal" 
+                                                 VerticalOptions="Center">
+                                        <Label Text="{Binding Name}" Grid.Column="0"
+                                               LineBreakMode="NoWrap" 
+                                               Style="{DynamicResource ListItemTextStyle}" 
+                                               FontSize="13"/>
+                                        <Label Text=" [" />
+                                        <Label Text="{Binding ConcentrationUnits}" 
+                                               LineBreakMode="NoWrap" 
+                                               Style="{DynamicResource ListItemTextStyle}" 
+                                               FontSize="13" />
+                                        <Label Text="]: " />
+                                        <Entry Text="{Binding Concentration, Mode=TwoWay}" Grid.Column="1"
+                                               HorizontalOptions="EndAndExpand" 
+                                               Placeholder="Number"
+                                               FontSize="13"/>
+                                    </StackLayout>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<Button Command="{Binding ResetConcentrations}"
+                        CommandParameter="{Binding SelectedTissue}"
+                        Margin="20,0,20,7" Height="25" 
+                        Grid.Column="2" Grid.Row="1"
+                        Clicked="{Binding ConverterParameter=Button_ResetValues, Converter={StaticResource MyResourceToStringConverter}}"--> 
+            </Grid>
+            <!--<StackLayout Orientation="Vertical"
+                        Margin="0,10,0,0">
+                    -->
+            <!-- Blood Concentration -->
+            <!--
+                    <view:BloodConcentrationView
+                    DataContext="{Binding BloodConcentrationVM}"
+                    Visibility="{Binding DisplayBloodVM, Converter={StaticResource MyBooleanToVisibilityConverter}}"
+                    Margin="0,3,0,0" />
+                    <StackLayout Margin="0,10,0,0">
+                        -->
+            <!-- Scatterer Type -->
+            <!--
+                        <view:RadioButtonOptionView DataContext="{Binding ScatteringTypeVM}" />
+                        -->
+            <!-- Intralipid parameters -->
+            <!--
+                        <view:ScatteringTemplateSelector ScatteringType="{Binding ScatteringTypeName, Mode=TwoWay}">
+                            <view:ScatteringTemplateSelector.IntralipidScatteringTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding VolumeFractionLabel}"  />
+                                        <Label Text=" = "  />
+                                        <Entry Text="{Binding Scatterer.VolumeFraction, Mode=TwoWay}" Width="40"
+                                             TextChanged="Entry_TextChanged" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </view:ScatteringTemplateSelector.IntralipidScatteringTemplate>
+                            -->
+            <!-- Mie Scatterer parameters -->
+            <!--
+                            <view:ScatteringTemplateSelector.MieScatteringTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal" Margin="3,0,0,0">
+                                        <Label Text="{Binding ParticleRadiusLabel}"  />
+                                        <Label Text="="  Margin="2,0,2,0" />
+                                        <Entry Text="{Binding Scatterer.ParticleRadius, Mode=TwoWay}" Width="40"
+                                             Margin="0,0,5,0" TextChanged="Entry_TextChanged" />
+                                        <Label Text="{Binding ParticleNLabel}"  />
+                                        <Label Text="="  Margin="2,0,2,0" />
+                                        <Entry Text="{Binding Scatterer.ParticleRefractiveIndexMismatch, Mode=TwoWay}"
+                                             Width="40" Margin="0,0,5,0" TextChanged="Entry_TextChanged" />
+                                        <Label Text="{Binding MediumNLabel}"  />
+                                        <Label Text="="  Margin="2,0,2,0" />
+                                        <Entry Text="{Binding Scatterer.MediumRefractiveIndexMismatch, Mode=TwoWay}"
+                                             Width="40" TextChanged="Entry_TextChanged" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </view:ScatteringTemplateSelector.MieScatteringTemplate>
+                            -->
+            <!-- Powerlaw parameters -->
+            <!--
+                            <view:ScatteringTemplateSelector.PowerLawScatteringTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Vertical" Margin="3,0,0,0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding ValueALabel}"  />
+                                            <Label Text="=" Margin="2,0,2,0" />
+                                            <Entry Text="{Binding Scatterer.A, Mode=TwoWay}" Width="Auto"
+                                                 Margin="0,0,5,0" TextChanged="Entry_TextChanged" />
+                                            <Label Text="{Binding ValueBLabel}" />
+                                            <Label Text="=" Margin="2,0,2,0" />
+                                            <Entry Text="{Binding Scatterer.B, Mode=TwoWay}" Width="Auto"
+                                                 Margin="0,0,5,0" TextChanged="Entry_TextChanged" />
+                                            <Label Text="{Binding PowerLawDefinitionALabel}" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </view:ScatteringTemplateSelector.PowerLawScatteringTemplate>
+                        </view:ScatteringTemplateSelector>
+                    </StackLayout>-->
+            <!-- Wavelength Range -->
+            <!--<StackLayout Orientation="Vertical" Margin="0,10,0,0">
+                --><!-- Single-λ Calculator --><!--
+                <Label Text="{Binding ConverterParameter=Label_Calculator, Converter={StaticResource MyResourceToStringConverter}}" 
+                               Margin="0,3,0,0" />
+                --><!-- Multi-λ Calculator --><!--
+                <StackLayout Orientation="Horizontal" Margin="3,0,0,0">
+                    <StackLayout Orientation="Horizontal" Margin="0,0,0,0">
+                        <Label Text="{Binding ConverterParameter=Label_Atnm, Converter={StaticResource MyResourceToStringConverter}}" HorizontalOptions="Left" />
+                        <Entry Text="{Binding Wavelength, Mode=TwoWay}"
+                                     Width="40" TextChanged="Entry_TextChanged" />
+                    </StackLayout>
+                    <Button Command="{Binding UpdateWavelength}"
+                                CommandParameter="{Binding Wavelength}"
+                                Margin="5,0,0,0" Height="25"
+                                Clicked="{Binding ConverterParameter=Button_Update, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Grid Margin="5,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="0.5*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Orientation="Horizontal"
+                                        Margin="0,0,0,0">
+                            <Label Text="μ" />
+                            <Label Text="a" />
+                            <Label Text=" [1/mm] = " />
+                            <Label Text="{Binding Mua, Converter={StaticResource MyDoubleToStringConverter}, ConverterParameter=g3}" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Orientation="Horizontal"
+                                        Margin="5,0,0,0">
+                            <Label Text="μ" />
+                            <Label Text="s"/>
+                            <Label Text="' [1/mm] = " />
+                            <Label Text="{Binding Musp,Converter={StaticResource MyDoubleToStringConverter}, ConverterParameter=g3}" />
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+                --><!--<StackLayout Orientation="Horizontal" >
+                            <view:RangeView DataContext="{Binding WavelengthRangeVM}" Margin="0,3,0,0"
+                                        VerticalAlignment="Top" />
+                            -->
+                <!-- Plot Buttons -->
+                <!--
+                            <Button
+                            Command="{Binding PlotMuaSpectrumCommand}"
+                            Margin="10,2,0,0" Height="25" 
+                            Clicked="{Binding PlotMuaButtonLabel}" />
+                            <Button
+                            Command="{Binding PlotMuspSpectrumCommand}"
+                            Margin="10,2,0,0" Height="25" 
+                            Clicked="{Binding PlotMusPrimeButtonLabel}" />
+                        </StackLayout>--><!--
+            </StackLayout>-->
+        </StackLayout>
+    </Grid>
+</ContentPage>

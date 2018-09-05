@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Vts.Gui.XF.View.BloodConcentrationView"
+             Title="Blood Concentration"> 
+    <Grid x:Name="LayoutRoot">
+        <StackLayout Orientation="Vertical">
+            <!-- Blood Concentration Labels -->
+            <!--<Label
+                Text="{Binding BloodConcentrationLabel}"
+                FontWeight="Bold" VerticalOptions="Center" HorizontalOptions="Left" />-->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding TotalHbLabel}" Margin="3,0,3,0" />
+                <Label Text="{Binding BloodVolumeLabel}" Margin="3,0,3,0" />
+                <Label Text="{Binding StO2Label}" Margin="3,0,3,0" />
+            </StackLayout>
+            <!--<StackLayout Orientation="Horizontal">
+                --><!-- Blood Concentration values --><!--
+                <Entry
+                    Text="{Binding TotalHb, Mode=TwoWay,Converter={StaticResource MyDoubleToStringConverter}, ConverterParameter=g3}"
+                    Width="40" Margin="30,0,0,0" KeyDown="TextBox_KeyDown" />
+                <Entry
+                    Text="{Binding BloodVolumeFraction, Mode=TwoWay,Converter={StaticResource MyDoubleToStringConverter}, ConverterParameter=g3}"
+                    Width="40" Margin="65,0,0,0" KeyDown="TextBox_KeyDown" />
+                <Entry
+                    Text="{Binding StO2, Mode=TwoWay,Converter={StaticResource MyDoubleToStringConverter}, ConverterParameter=g3}"
+                    Width="40" Margin="75,0,0,0" KeyDown="TextBox_KeyDown" />
+            </StackLayout>-->
+        </StackLayout>
+    </Grid>
+</ContentPage>
