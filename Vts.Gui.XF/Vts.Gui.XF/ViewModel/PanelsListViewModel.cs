@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-using Vts.Gui.XF.Models;
+using Vts.Gui.XF.Model;
 using Vts.Gui.XF.View;
 
 namespace Vts.Gui.XF.ViewModel

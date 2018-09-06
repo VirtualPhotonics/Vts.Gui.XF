@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vts.Gui.XF.Models;
+using Vts.Gui.XF.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vts.Gui.XF.Models
+namespace Vts.Gui.XF.Model
 {
     public class PanelsItem
     {

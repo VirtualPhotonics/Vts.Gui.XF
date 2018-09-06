@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
-using Vts.Gui.XF.Models;
+using Vts.Gui.XF.Model;
 
 namespace Vts.Gui.XF.ViewModel
 {
