@@ -78,4 +78,8 @@ CVS
 #######################
 *.nuspec
 *.nupkg
+
+# Visual Studio files #
+#######################
+.vs/
 src/.vs/
