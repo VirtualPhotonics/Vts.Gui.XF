@@ -1,22 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Vts.Gui.XF.View.BloodConcentrationView"
-             Title="Blood Concentration"> 
+             x:Class="Vts.Gui.XF.View.BloodConcentrationView"> 
     <Grid x:Name="LayoutRoot">
         <StackLayout Orientation="Vertical">
             <!-- Blood Concentration Labels -->
             <!--<Label
                 Text="{Binding BloodConcentrationLabel}"
                 FontWeight="Bold" VerticalOptions="Center" HorizontalOptions="Left" />-->
-            <Label Grid.Column="0" Grid.Row="1" 
-                   Text="Blood Concentrations:"           
+            <Label Text="Blood Concentrations:"           
                    FontSize="13"/>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding TotalHbLabel}" Margin="3,0,3,0" />
-                <Label Text="{Binding BloodVolumeLabel}" Margin="3,0,3,0" />
-                <Label Text="{Binding StO2Label}" Margin="3,0,3,0" />
-            </StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="85" />
+                    <ColumnDefinition Width="85" />
+                    <ColumnDefinition Width="85" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+
+                <!--<Label Text="{Binding TotalHbLabel}" />-->
+                <!--<Label Text="{Binding BloodVolumeLabel}" Margin="3,0,3,0" />-->
+                <Label Text="Total Hb [uM]:" Grid.Column="0" Grid.Row="0"
+                        LineBreakMode="NoWrap" 
+                        FontSize="13"/>
+                <Label Text="Blood Vol [vol. frac.]:" Grid.Column="1" Grid.Row="0"
+                        LineBreakMode="NoWrap"
+                        FontSize="13"/>
+                <Label Text="StO2 [frac.]:" Grid.Column="2" Grid.Row="0"
+                        LineBreakMode="NoWrap"
+                        FontSize="13"/>
+                <Entry Text="{Binding TotalHb, Mode=TwoWay}" Grid.Column="0" Grid.Row="1"
+                       HorizontalOptions="CenterAndExpand" 
+                       Placeholder="Number"
+                       FontSize="13"/>
+                <Entry Text="{Binding BloodVolumeFraction, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"
+                        HorizontalOptions="CenterAndExpand" 
+                        Placeholder="Number"
+                        FontSize="13"/>
+                <Entry Text="{Binding StO2, Mode=TwoWay}" Grid.Column="2" Grid.Row="1"
+                        HorizontalOptions="CenterAndExpand" 
+                        Placeholder="Number"
+                        FontSize="13"/>
+              
+            </Grid>
             <!--<StackLayout Orientation="Horizontal">
                 --><!-- Blood Concentration values --><!--
                 <Entry
@@ -31,4 +60,4 @@
             </StackLayout>-->
         </StackLayout>
     </Grid>
-</ContentPage>
+</ContentView>

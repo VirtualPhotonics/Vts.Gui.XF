@@ -28,15 +28,15 @@ namespace Vts.Gui.XF.ViewModel
     public class SpectralMappingViewModel : BindableObject,INotifyPropertyChanged
     {
         private BloodConcentrationViewModel _bloodConcentrationVM;
-        //private double _g;
-        //private double _mua;
-        //private double _musp;
+        private double _g;
+        private double _mua;
+        private double _musp;
         //private IScatterer _scatterer;
         //private string _scatteringTypeName;
         //private OptionViewModel<ScatteringType> _scatteringTypeVM;
         private Tissue _selectedTissue;
         private List<Tissue> _tissues;
-        //private double _wavelength;
+        private double _wavelength;
         //private RangeViewModel _wavelengthRangeVM;
 
         public SpectralMappingViewModel()
@@ -86,7 +86,7 @@ namespace Vts.Gui.XF.ViewModel
             };
 
 
-            //           BloodConcentrationVM = new BloodConcentrationViewModel();
+                       BloodConcentrationVM = new BloodConcentrationViewModel();
 
             //            #region DC notes 1
 
@@ -220,18 +220,18 @@ namespace Vts.Gui.XF.ViewModel
 
                 // update the BloodConcentrationViewModel to point to the IChromophoreAbsorber instances 
                 // specified in the updated SelectedTissue
-                //var hb = _selectedTissue.Absorbers.Where(abs => abs.Name == "Hb").FirstOrDefault();
-                //var hbO2 = _selectedTissue.Absorbers.Where(abs => abs.Name == "HbO2").FirstOrDefault();
+                var hb = _selectedTissue.Absorbers.Where(abs => abs.Name == "Hb").FirstOrDefault();
+                var hbO2 = _selectedTissue.Absorbers.Where(abs => abs.Name == "HbO2").FirstOrDefault();
 
-                //// only assign the values if both queries return valid (non-null) instances of IChromophoreAbsorber
-                //if (hb != null && hbO2 != null)
-                //{
-                //    BloodConcentrationVM.Hb = hb;
-                //    BloodConcentrationVM.HbO2 = hbO2;
-                //    BloodConcentrationVM.DisplayBloodVM = true;
-                //}
-                //else
-                //    BloodConcentrationVM.DisplayBloodVM = false;
+                // only assign the values if both queries return valid (non-null) instances of IChromophoreAbsorber
+                if (hb != null && hbO2 != null)
+                {
+                    BloodConcentrationVM.Hb = hb;
+                    BloodConcentrationVM.HbO2 = hbO2;
+                    BloodConcentrationVM.DisplayBloodVM = true;
+                }
+                else
+                    BloodConcentrationVM.DisplayBloodVM = false;
             }
         }
 
@@ -255,48 +255,48 @@ namespace Vts.Gui.XF.ViewModel
         //    }
         //}
 
-        //public OpticalProperties OpticalProperties { get; private set; }
+        public OpticalProperties OpticalProperties { get; private set; }
 
-        //public double Mua
-        //{
-        //    get { return OpticalProperties.Mua; }
-        //    set
-        //    {
-        //        OpticalProperties.Mua = value;
-        //        OnPropertyChanged("Mua");
-        //    }
-        //}
+        public double Mua
+        {
+            get { return OpticalProperties.Mua; }
+            set
+            {
+                OpticalProperties.Mua = value;
+                OnPropertyChanged("Mua");
+            }
+        }
 
-        //public double Musp
-        //{
-        //    get { return OpticalProperties.Musp; }
-        //    set
-        //    {
-        //        OpticalProperties.Musp = value;
-        //        OnPropertyChanged("Musp");
-        //        OnPropertyChanged("ScatteringTypeVM");
-        //    }
-        //}
+        public double Musp
+        {
+            get { return OpticalProperties.Musp; }
+            set
+            {
+                OpticalProperties.Musp = value;
+                OnPropertyChanged("Musp");
+                OnPropertyChanged("ScatteringTypeVM");
+            }
+        }
 
-        //public double G
-        //{
-        //    get { return OpticalProperties.G; }
-        //    set
-        //    {
-        //        OpticalProperties.G = value;
-        //        OnPropertyChanged("G");
-        //    }
-        //}
+        public double G
+        {
+            get { return OpticalProperties.G; }
+            set
+            {
+                OpticalProperties.G = value;
+                OnPropertyChanged("G");
+            }
+        }
 
-        //public double N
-        //{
-        //    get { return OpticalProperties.N; }
-        //    set
-        //    {
-        //        OpticalProperties.N = value;
-        //        OnPropertyChanged("N");
-        //    }
-        //}
+        public double N
+        {
+            get { return OpticalProperties.N; }
+            set
+            {
+                OpticalProperties.N = value;
+                OnPropertyChanged("N");
+            }
+        }
 
         //public RangeViewModel WavelengthRangeVM
         //{
