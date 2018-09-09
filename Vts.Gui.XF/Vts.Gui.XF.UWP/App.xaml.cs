@@ -40,7 +40,6 @@ namespace Vts.Gui.XF.UWP
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -53,6 +52,7 @@ namespace Vts.Gui.XF.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e);
+                OxyPlot.Xamarin.Forms.Platform.UWP.PlotViewRenderer.Init();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

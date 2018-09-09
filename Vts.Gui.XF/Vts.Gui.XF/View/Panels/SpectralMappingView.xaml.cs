@@ -1,6 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using Vts.Gui.XF.View;
 using Vts.Gui.XF.ViewModel;
 
@@ -18,6 +18,10 @@ namespace Vts.Gui.XF.View
             BindingContext = viewModel = new SpectralMappingViewModel();
         }
 
+        async void OnPlotMuaSpectrumButton_Clicked(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new PlotView());                
+        }
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             //var panel = args.SelectedItem as Item
@@ -29,6 +33,7 @@ namespace Vts.Gui.XF.View
             //    // Manually deselect item.
             //    //ItemsListView.SelectedItem = null;
         }
+
         private void Entry_TextChanged(object sender, SelectedItemChangedEventArgs e)
         {
             var tbx = sender as Entry;

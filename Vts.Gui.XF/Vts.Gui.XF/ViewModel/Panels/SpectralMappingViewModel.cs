@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using Vts.SpectralMapping;
 //using GalaSoft.MvvmLight.Command;
 using Vts.Common;
 using Vts.Factories;
 using Vts.Gui.XF.Extensions;
+using Vts.Gui.XF.Model;
+using Vts.Gui.XF.View;
 using Vts.SpectralMapping;
 using Xamarin.Forms;
 
@@ -20,7 +25,7 @@ namespace Vts.Gui.XF.ViewModel
     /// <summary>
     ///     View model implementing Spectral panel functionality
     /// </summary>
-    public class SpectralMappingViewModel : BindableObject
+    public class SpectralMappingViewModel : BindableObject,INotifyPropertyChanged
     {
         private BloodConcentrationViewModel _bloodConcentrationVM;
         //private double _g;
@@ -79,7 +84,7 @@ namespace Vts.Gui.XF.ViewModel
                 //new Tissue(TissueType.PolystyreneSpherePhantom),
                 new Tissue(TissueType.Custom)
             };
-            
+
 
             //           BloodConcentrationVM = new BloodConcentrationViewModel();
 
@@ -103,13 +108,14 @@ namespace Vts.Gui.XF.ViewModel
 
             //            ResetConcentrations = new RelayCommand<object>(ResetConcentrations_Executed);
             //            UpdateWavelength = new RelayCommand<object>(UpdateWavelength_Executed);
-            //            PlotMuaSpectrumCommand = new RelayCommand(PlotMuaSpectrum_Executed);
-            //            PlotMuspSpectrumCommand = new RelayCommand(PlotMuspSpectrum_Executed);
+            //PlotMuaSpectrumCommand = new RelayCommand(PlotMuaSpectrum_Executed);
+            PlotMuaSpectrumCommand = new Command(async () => await OnPlotMuaSpectrumCommand());
+            //PlotMuspSpectrumCommand = new RelayCommand(PlotMuspSpectrum_Executed);
         }
 
         //public RelayCommand<object> ResetConcentrations { get; set; }
         //public RelayCommand<object> UpdateWavelength { get; set; }
-        //public RelayCommand PlotMuaSpectrumCommand { get; set; }
+        public ICommand PlotMuaSpectrumCommand { get; set; }       
         //public RelayCommand PlotMuspSpectrumCommand { get; set; }
 
         public ObservableCollection<string> TissueTypesLabel
@@ -332,39 +338,40 @@ namespace Vts.Gui.XF.ViewModel
         //    SelectedTissue = _tissue;
         //}
 
-        //private void PlotMuaSpectrum_Executed()
-        //{
-        //    var axisType = IndependentVariableAxis.Wavelength;
-        //    var axisUnits = IndependentVariableAxisUnits.NM;
-        //    var axesLabels = new PlotAxesLabels(
-        //        StringLookup.GetLocalizedString("Label_MuA"),
-        //        StringLookup.GetLocalizedString("Measurement_Inv_mm"),
-        //        new IndependentAxisViewModel
-        //        {
-        //            AxisType = axisType,
-        //            AxisLabel = axisType.GetInternationalizedString(),
-        //            AxisUnits = axisUnits.GetInternationalizedString(),
-        //            AxisRangeVM = WavelengthRangeVM
-        //        });
+        async Task OnPlotMuaSpectrumCommand()
+        {
 
-        //    WindowViewModel.Current.PlotVM.SetAxesLabels.Execute(axesLabels);
-        //    //Commands.Plot_SetAxesLabels.Execute(axesLabels, null);
+            var axisType = IndependentVariableAxis.Wavelength;
+            var axisUnits = IndependentVariableAxisUnits.NM;
+            //var axesLabels = new PlotAxesLabels(
+            //    StringLookup.GetLocalizedString("Label_MuA"),
+            //    StringLookup.GetLocalizedString("Measurement_Inv_mm"),
+            //    new IndependentAxisViewModel
+            //    {
+            //        AxisType = axisType,
+            //        AxisLabel = axisType.GetInternationalizedString(),
+            //        AxisUnits = axisUnits.GetInternationalizedString(),
+            //        AxisRangeVM = WavelengthRangeVM
+            //    });
 
-        //    var tissue = SelectedTissue;
-        //    var wavelengths = WavelengthRangeVM.Values.ToArray();
-        //    var points = new Point[wavelengths.Length];
-        //    for (var wvi = 0; wvi < wavelengths.Length; wvi++)
-        //    {
-        //        var wavelength = wavelengths[wvi];
-        //        points[wvi] = new Point(wavelength, tissue.GetMua(wavelength));
-        //    }
-        //    WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] {new PlotData(points, StringLookup.GetLocalizedString("Label_MuASpectra"))});
+            //WindowViewModel.Current.PlotVM.SetAxesLabels.Execute(axesLabels);
+            ////Commands.Plot_SetAxesLabels.Execute(axesLabels, null);
 
-        //    var minWavelength = WavelengthRangeVM.Values.Min();
-        //    var maxWavelength = WavelengthRangeVM.Values.Max();
-        //    WindowViewModel.Current.TextOutputVM.TextOutput_PostMessage.Execute(
-        //        StringLookup.GetLocalizedString("Message_PlotMuASpectrum") + "[" + minWavelength + ", " + maxWavelength + "]\r");
-        //}
+            //var tissue = SelectedTissue;
+            //var wavelengths = WavelengthRangeVM.Values.ToArray();
+            //var points = new Point[wavelengths.Length];
+            //for (var wvi = 0; wvi < wavelengths.Length; wvi++)
+            //{
+            //    var wavelength = wavelengths[wvi];
+            //    points[wvi] = new Point(wavelength, tissue.GetMua(wavelength));
+            //}
+            //WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] { new PlotData(points, StringLookup.GetLocalizedString("Label_MuASpectra")) });
+
+            //var minWavelength = WavelengthRangeVM.Values.Min();
+            //var maxWavelength = WavelengthRangeVM.Values.Max();
+            //WindowViewModel.Current.TextOutputVM.TextOutput_PostMessage.Execute(
+            //    StringLookup.GetLocalizedString("Message_PlotMuASpectrum") + "[" + minWavelength + ", " + maxWavelength + "]\r");
+        }
 
         //private void PlotMuspSpectrum_Executed()
         //{

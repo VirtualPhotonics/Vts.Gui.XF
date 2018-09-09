@@ -9,6 +9,9 @@
             <!--<Label
                 Text="{Binding BloodConcentrationLabel}"
                 FontWeight="Bold" VerticalOptions="Center" HorizontalOptions="Left" />-->
+            <Label Grid.Column="0" Grid.Row="1" 
+                   Text="Blood Concentrations:"           
+                   FontSize="13"/>
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding TotalHbLabel}" Margin="3,0,3,0" />
                 <Label Text="{Binding BloodVolumeLabel}" Margin="3,0,3,0" />
