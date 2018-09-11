@@ -1,5 +1,6 @@
 using Vts.Gui.XF.Extensions;
 using Vts.SpectralMapping;
+using Xamarin.Forms;
 
 namespace Vts.Gui.XF.ViewModel
 {
@@ -186,5 +187,6 @@ namespace Vts.Gui.XF.ViewModel
             OnPropertyChanged("TotalHb");
             OnPropertyChanged("BloodVolumeFraction");
         }
+
     }
 }

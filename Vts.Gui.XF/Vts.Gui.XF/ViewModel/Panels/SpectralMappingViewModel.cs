@@ -99,7 +99,7 @@ namespace Vts.Gui.XF.ViewModel
 
             //            BloodConcentrationVM.PropertyChanged += (sender, args) => UpdateOpticalProperties();
 
-            //            SelectedTissue = Tissues.First();
+                        SelectedTissue = Tissues.First();
             //            ScatteringTypeVM.SelectedValue = SelectedTissue.ScattererType;
             //                // forces update to all bindings established in hanlder for ScatteringTypeVM.PropertyChanged above
             //            ScatteringTypeName = SelectedTissue.GetType().FullName;

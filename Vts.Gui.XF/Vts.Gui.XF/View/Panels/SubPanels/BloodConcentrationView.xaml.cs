@@ -17,6 +17,7 @@ namespace Vts.Gui.XF.View
             BindingContext = viewModel = new BloodConcentrationViewModel();
         }
 
+
         //private void TextBox_KeyDown(object sender, KeyEventArgs e)
         private void TextBox_KeyDown(object sender)
         {

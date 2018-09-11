@@ -17,7 +17,13 @@ namespace Vts.Gui.XF.View
 
             BindingContext = viewModel = new SpectralMappingViewModel();
         }
-
+        private void SetSectionVisibility(StackLayout section, bool isVisible)
+        {
+            // found following solution on web:
+            // https://forums.xamarin.com/discussion/35461/isvisible-inside-control-inside-stacklayout-inside-scrollview-not-work
+            // basically sets height of stackLayout = 0 equiv to isVisible=false, =-1 equiv to isVisible=true 
+            section.HeightRequest = isVisible ? -1d : 0;
+        }
         async void OnPlotMuaSpectrumButton_Clicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new PlotView());                
