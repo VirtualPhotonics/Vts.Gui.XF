@@ -25,52 +25,52 @@ namespace Vts.Gui.XF.ViewModel
     /// <summary>
     ///     View model implementing Spectral panel functionality
     /// </summary>
-    public class SpectralMappingViewModel : BindableObject,INotifyPropertyChanged
+    public class SpectralMappingViewModel : BindableObject, INotifyPropertyChanged
     {
         private BloodConcentrationViewModel _bloodConcentrationVM;
         private double _g;
         private double _mua;
         private double _musp;
-        //private IScatterer _scatterer;
-        //private string _scatteringTypeName;
-        //private OptionViewModel<ScatteringType> _scatteringTypeVM;
+        private IScatterer _scatterer;
+        private string _scatteringTypeName;
+        private OptionViewModel<ScatteringType> _scatteringTypeVM;
         private Tissue _selectedTissue;
         private List<Tissue> _tissues;
         private double _wavelength;
-        //private RangeViewModel _wavelengthRangeVM;
+        private RangeViewModel _wavelengthRangeVM;
 
         public SpectralMappingViewModel()
         {
-            //#if WHITELIST 
-            //            ScatteringTypeVM = new OptionViewModel<ScatteringType>(StringLookup.GetLocalizedString("Heading_ScattererType"), true, WhiteList.ScatteringTypes);
-            //#else
-            //            ScatteringTypeVM = new OptionViewModel<ScatteringType>(StringLookup.GetLocalizedString("Heading_ScattererType"), true);
-            //#endif
-            //            ScatteringTypeVM.PropertyChanged += (sender, args) =>
-            //            {
-            //                if (args.PropertyName == "SelectedValue" && SelectedTissue != null)
-            //                    //SelectedTissue.ScattererType != ScatteringTypeVM.SelectedValue)
-            //                {
-            //                    SelectedTissue.Scatterer = SolverFactory.GetScattererType(ScatteringTypeVM.SelectedValue);
-            //                    var bindableScatterer = SelectedTissue.Scatterer as INotifyPropertyChanged;
-            //                    if (bindableScatterer != null)
-            //                    {
-            //                        bindableScatterer.PropertyChanged += (s, a) => UpdateOpticalProperties();
-            //                    }
-            //                    //LM - Temporary Fix to reset the tissue type after a new scatterer is created
-            //                    if (SelectedTissue.ScattererType == ScatteringType.PowerLaw)
-            //                    {
-            //                        var myScatterer = (PowerLawScatterer) SelectedTissue.Scatterer;
-            //                        myScatterer.SetTissueType(SelectedTissue.TissueType);
-            //                    }
-            //                    ScatteringTypeName = SelectedTissue.Scatterer.GetType().FullName;
-            //                }
-            //                OnPropertyChanged("Scatterer");
-            //                UpdateOpticalProperties();
-            //            };
+#if WHITELIST
+            ScatteringTypeVM = new OptionViewModel<ScatteringType>(StringLookup.GetLocalizedString("Heading_ScattererType"), true, WhiteList.ScatteringTypes);
+#else
+            ScatteringTypeVM = new OptionViewModel<ScatteringType>(StringLookup.GetLocalizedString("Heading_ScattererType"), true);
+#endif
+            ScatteringTypeVM.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == "SelectedValue" && SelectedTissue != null)
+                            //SelectedTissue.ScattererType != ScatteringTypeVM.SelectedValue)
+                            {
+                    SelectedTissue.Scatterer = SolverFactory.GetScattererType(ScatteringTypeVM.SelectedValue);
+                    var bindableScatterer = SelectedTissue.Scatterer as INotifyPropertyChanged;
+                    if (bindableScatterer != null)
+                    {
+                        bindableScatterer.PropertyChanged += (s, a) => UpdateOpticalProperties();
+                    }
+                                //LM - Temporary Fix to reset the tissue type after a new scatterer is created
+                                if (SelectedTissue.ScattererType == ScatteringType.PowerLaw)
+                    {
+                        var myScatterer = (PowerLawScatterer)SelectedTissue.Scatterer;
+                        myScatterer.SetTissueType(SelectedTissue.TissueType);
+                    }
+                    ScatteringTypeName = SelectedTissue.Scatterer.GetType().FullName;
+                }
+                OnPropertyChanged("Scatterer");
+                UpdateOpticalProperties();
+            };
 
-            //            WavelengthRangeVM = new RangeViewModel(new DoubleRange(650.0, 1000.0, 36), StringLookup.GetLocalizedString("Measurement_nm"),
-            //                IndependentVariableAxis.Wavelength, StringLookup.GetLocalizedString("Heading_WavelengthRange"));
+            WavelengthRangeVM = new RangeViewModel(new DoubleRange(650.0, 1000.0, 36), StringLookup.GetLocalizedString("Measurement_nm"),
+                           IndependentVariableAxis.Wavelength, StringLookup.GetLocalizedString("Heading_WavelengthRange"));
 
             Tissues = new List<Tissue>()
             {
@@ -97,14 +97,14 @@ namespace Vts.Gui.XF.ViewModel
 
             //            #endregion
 
-            //            BloodConcentrationVM.PropertyChanged += (sender, args) => UpdateOpticalProperties();
+                        BloodConcentrationVM.PropertyChanged += (sender, args) => UpdateOpticalProperties();
 
                         SelectedTissue = Tissues.First();
             //            ScatteringTypeVM.SelectedValue = SelectedTissue.ScattererType;
             //                // forces update to all bindings established in hanlder for ScatteringTypeVM.PropertyChanged above
-            //            ScatteringTypeName = SelectedTissue.GetType().FullName;
-            //            OpticalProperties = new OpticalProperties(0.01, 1, 0.8, 1.4);
-            //            Wavelength = 650;
+                        ScatteringTypeName = SelectedTissue.GetType().FullName;
+                        OpticalProperties = new OpticalProperties(0.01, 1, 0.8, 1.4);
+                        Wavelength = 650;
 
             //            ResetConcentrations = new RelayCommand<object>(ResetConcentrations_Executed);
             //            UpdateWavelength = new RelayCommand<object>(UpdateWavelength_Executed);
@@ -121,86 +121,86 @@ namespace Vts.Gui.XF.ViewModel
         public ObservableCollection<string> TissueTypesLabel
         {
             get { return new ObservableCollection<string>() {StringLookup.GetLocalizedString("Label_TissueTypes")}; }
-        }  
+        }
 
-        //public string AbsorberConcentrationsLabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Label_AbsorberConcentrations"); }
-        //}
+        public string AbsorberConcentrationsLabel
+        {
+            get { return StringLookup.GetLocalizedString("Label_AbsorberConcentrations"); }
+        }
 
-        //public string VolumeFractionLabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Value_VolumeFraction"); }
-        //}
+        public string VolumeFractionLabel
+        {
+            get { return StringLookup.GetLocalizedString("Value_VolumeFraction"); }
+        }
 
-        //public string ParticleRadiusLabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Value_ParticleRadius"); }
-        //}
+        public string ParticleRadiusLabel
+        {
+            get { return StringLookup.GetLocalizedString("Value_ParticleRadius"); }
+        }
 
-        //public string ParticleNLabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Value_ParticleN"); }
-        //}
+        public string ParticleNLabel
+        {
+            get { return StringLookup.GetLocalizedString("Value_ParticleN"); }
+        }
 
-        //public string MediumNLabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Value_MediumN"); }
-        //}
+        public string MediumNLabel
+        {
+            get { return StringLookup.GetLocalizedString("Value_MediumN"); }
+        }
 
-        //public string ValueALabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Value_A"); }
-        //}
+        public string ValueALabel
+        {
+            get { return StringLookup.GetLocalizedString("Value_A"); }
+        }
 
-        //public string ValueBLabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Value_b"); }
-        //}
+        public string ValueBLabel
+        {
+            get { return StringLookup.GetLocalizedString("Value_b"); }
+        }
 
-        //public string PowerLawDefinitionALabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Label_PowerLawDefinitionA"); }
-        //}
+        public string PowerLawDefinitionALabel
+        {
+            get { return StringLookup.GetLocalizedString("Label_PowerLawDefinitionA"); }
+        }
 
-        //public string PlotMuaButtonLabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Button_PlotMua"); }
-        //}
+        public string PlotMuaButtonLabel
+        {
+            get { return StringLookup.GetLocalizedString("Button_PlotMua"); }
+        }
 
-        //public string PlotMusPrimeButtonLabel
-        //{
-        //    get { return StringLookup.GetLocalizedString("Button_PlotMusPrime"); }
-        //}
+        public string PlotMusPrimeButtonLabel
+        {
+            get { return StringLookup.GetLocalizedString("Button_PlotMusPrime"); }
+        }
 
-        ///// <summary>
-        /////     Simple pass-through for SelectedTissue.Scatterer
-        /////     to allow simpler data binding in Views
-        ///// </summary>
-        //public IScatterer Scatterer
-        //{
-        //    get { return _selectedTissue.Scatterer; }
-        //}
+        /// <summary>
+        ///     Simple pass-through for SelectedTissue.Scatterer
+        ///     to allow simpler data binding in Views
+        /// </summary>
+        public IScatterer Scatterer
+        {
+            get { return _selectedTissue.Scatterer; }
+        }
 
-        //public string ScatteringTypeName
-        //{
-        //    get { return _scatteringTypeName; }
-        //    set
-        //    {
-        //        _scatteringTypeName = value;
-        //        OnPropertyChanged("ScatteringTypeName");
-        //    }
-        //}
+        public string ScatteringTypeName
+        {
+            get { return _scatteringTypeName; }
+            set
+            {
+                _scatteringTypeName = value;
+                OnPropertyChanged("ScatteringTypeName");
+            }
+        }
 
-        //public OptionViewModel<ScatteringType> ScatteringTypeVM
-        //{
-        //    get { return _scatteringTypeVM; }
-        //    set
-        //    {
-        //        _scatteringTypeVM = value;
-        //        OnPropertyChanged("ScatteringTypeVM");
-        //    }
-        //}
+        public OptionViewModel<ScatteringType> ScatteringTypeVM
+        {
+            get { return _scatteringTypeVM; }
+            set
+            {
+                _scatteringTypeVM = value;
+                OnPropertyChanged("ScatteringTypeVM");
+            }
+        }
 
         public Tissue SelectedTissue
         {
@@ -213,10 +213,10 @@ namespace Vts.Gui.XF.ViewModel
                 OnPropertyChanged("SelectedTissue");
                 OnPropertyChanged("Scatterer");
 
-                //ScatteringTypeVM.Options[_selectedTissue.Scatterer.ScattererType].IsSelected = true;
-                //ScatteringTypeName = _selectedTissue.Scatterer.GetType().FullName;
+                ScatteringTypeVM.Options[_selectedTissue.Scatterer.ScattererType].IsSelected = true;
+                ScatteringTypeName = _selectedTissue.Scatterer.GetType().FullName;
 
-                //UpdateOpticalProperties();
+                UpdateOpticalProperties();
 
                 // update the BloodConcentrationViewModel to point to the IChromophoreAbsorber instances 
                 // specified in the updated SelectedTissue
@@ -244,16 +244,16 @@ namespace Vts.Gui.XF.ViewModel
             }
         }
 
-        //public double Wavelength
-        //{
-        //    get { return _wavelength; }
-        //    set
-        //    {
-        //        _wavelength = value;
-        //        UpdateOpticalProperties();
-        //        OnPropertyChanged("Wavelength");
-        //    }
-        //}
+        public double Wavelength
+        {
+            get { return _wavelength; }
+            set
+            {
+                _wavelength = value;
+                UpdateOpticalProperties();
+                OnPropertyChanged("Wavelength");
+            }
+        }
 
         public OpticalProperties OpticalProperties { get; private set; }
 
@@ -298,15 +298,15 @@ namespace Vts.Gui.XF.ViewModel
             }
         }
 
-        //public RangeViewModel WavelengthRangeVM
-        //{
-        //    get { return _wavelengthRangeVM; }
-        //    set
-        //    {
-        //        _wavelengthRangeVM = value;
-        //        OnPropertyChanged("WavelengthRangeVM");
-        //    }
-        //}
+        public RangeViewModel WavelengthRangeVM
+        {
+            get { return _wavelengthRangeVM; }
+            set
+            {
+                _wavelengthRangeVM = value;
+                OnPropertyChanged("WavelengthRangeVM");
+            }
+        }
 
         public BloodConcentrationViewModel BloodConcentrationVM
         {
@@ -319,17 +319,17 @@ namespace Vts.Gui.XF.ViewModel
             }
         }
 
-        //private void UpdateOpticalProperties()
-        //{
-        //    OpticalProperties = SelectedTissue.GetOpticalProperties(Wavelength);
-        //    OnPropertyChanged("Mua");
-        //    OnPropertyChanged("Musp");
-        //    OnPropertyChanged("G");
-        //    OnPropertyChanged("N");
-        //    OnPropertyChanged("OpticalProperties");
-        //    WindowViewModel.Current.ForwardSolverVM.UpdateOpticalProperties_Executed();
-        //    //Commands.Spec_UpdateOpticalProperties.Execute(OpticalProperties, null);
-        //}
+        private void UpdateOpticalProperties()
+        {
+            OpticalProperties = SelectedTissue.GetOpticalProperties(Wavelength);
+            OnPropertyChanged("Mua");
+            OnPropertyChanged("Musp");
+            OnPropertyChanged("G");
+            OnPropertyChanged("N");
+            OnPropertyChanged("OpticalProperties");
+            //WindowViewModel.Current.ForwardSolverVM.UpdateOpticalProperties_Executed();
+            //Commands.Spec_UpdateOpticalProperties.Execute(OpticalProperties, null);
+        }
 
         //private void ResetConcentrations_Executed(object obj)
         //{

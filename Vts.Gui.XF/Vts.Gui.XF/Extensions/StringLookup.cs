@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Resources;
 using System.Threading;
-using Vts.Common.Resources;
+using Vts.Gui.XF.Resources;
 
 namespace Vts.Gui.XF.Extensions
 {

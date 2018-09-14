@@ -1,8 +1,6 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System;
+using System.ComponentModel;
 using OxyPlot;
-using Vts.Gui.Wpf.View;
-using Vts.Gui.XF.ViewModel;
 using Vts.SpectralMapping;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,8 +13,12 @@ namespace Vts.Gui.XF.View
             "ScatteringType",
             typeof(string),
             typeof(ScatteringTemplateSelector),
-            null);
-            //new PropertyMetadata(string.Empty, UpdateScatteringType));
+            "Vts.SpectralMapping.PowerLawScatterer",
+            BindingMode.TwoWay,
+            propertyChanged: UpdateScatteringType);
+
+
+        //new PropertyMetadata(string.Empty, UpdateScatteringType));
 
         public ScatteringTemplateSelector()
         {
@@ -34,23 +36,26 @@ namespace Vts.Gui.XF.View
             set { SetValue(ScatteringTypeProperty, value); }
         }
 
-        private void UpdateScatteringType(object obj, PropertyChangedEventArgs e)
+        private static void UpdateScatteringType(Xamarin.Forms.BindableObject bindable, object oldValue, object newValue)
         {
-            var selector = obj as ScatteringTemplateSelector;
+            //throw new NotImplementedException();
 
-            var scattType = e.PropertyName as string;
-            //if (scattType == typeof(MieScatterer).FullName)
-            //{
-            //    selector.Content = selector.MieScatteringTemplate.LoadContent() as UIElement;
-            //}
-            //else if (scattType == typeof(PowerLawScatterer).FullName)
-            //{
-            //    selector.Content = selector.PowerLawScatteringTemplate.SetBinding() as PowerLawScatteringView;
-            //}
-            //else if (scattType == typeof(IntralipidScatterer).FullName)
-            //{
-            //    selector.Content = selector.IntralipidScatteringTemplate.LoadContent() as UIElement;
-            //}
+            var selector = oldValue as ScatteringTemplateSelector;
+
+            var scattType = selector.ScatteringType;
+            if (scattType == typeof(MieScatterer).FullName)
+            {
+                //selector.Content = selector.MieScatteringTemplate.LoadContent() as UIElement;
+            }
+            else if (scattType == typeof(PowerLawScatterer).FullName)
+            {
+                //selector.Content = selector.PowerLawScatteringTemplate.LoadContent() as UIElement;
+                oldValue = selector.PowerLawScatteringTemplate;
+            }
+            else if (scattType == typeof(IntralipidScatterer).FullName)
+            {
+                //selector.Content = selector.IntralipidScatteringTemplate.LoadContent() as UIElement;
+            }
         }
     }
 }

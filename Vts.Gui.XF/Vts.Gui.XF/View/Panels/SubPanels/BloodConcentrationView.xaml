@@ -5,42 +5,36 @@
     <Grid x:Name="LayoutRoot">
         <StackLayout Orientation="Vertical">
             <!-- Blood Concentration Labels -->
-            <!--<Label
-                Text="{Binding BloodConcentrationLabel}"
-                FontWeight="Bold" VerticalOptions="Center" HorizontalOptions="Left" />-->
-            <Label Text="Blood Concentrations:"           
-                   FontSize="13"/>
+            <Label Text="{Binding BloodConcentrationlabel}"  />
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="85" />
-                    <ColumnDefinition Width="85" />
-                    <ColumnDefinition Width="85" />
+                    <ColumnDefinition Width="95" />
+                    <ColumnDefinition Width="95" />
+                    <ColumnDefinition Width="95" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
 
-                <!--<Label Text="{Binding TotalHbLabel}" />-->
-                <!--<Label Text="{Binding BloodVolumeLabel}" Margin="3,0,3,0" />-->
-                <Label Text="Total Hb [uM]:" Grid.Column="0" Grid.Row="0"
+                <Label Text="{Binding TotalHbLabel}" Grid.Column="0" Grid.Row="0"
                         LineBreakMode="NoWrap" 
                         FontSize="13"/>
-                <Label Text="Blood Vol [vol. frac.]:" Grid.Column="1" Grid.Row="0"
+                <Label Text="{Binding BloodVolumeLabel}" Grid.Column="1" Grid.Row="0"
+                        LineBreakMode="CharacterWrap"
+                        FontSize="13"/>
+                <Label Text="{Binding StO2Label}" Grid.Column="2" Grid.Row="0"
                         LineBreakMode="NoWrap"
                         FontSize="13"/>
-                <Label Text="StO2 [frac.]:" Grid.Column="2" Grid.Row="0"
-                        LineBreakMode="NoWrap"
-                        FontSize="13"/>
-                <Entry Text="{Binding TotalHb, Mode=TwoWay}" Grid.Column="0" Grid.Row="1"
+                <Entry Text="{Binding TotalHb, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" WidthRequest="70"
                        HorizontalOptions="CenterAndExpand" 
                        Placeholder="Number"
                        FontSize="13"/>
-                <Entry Text="{Binding BloodVolumeFraction, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"
+                <Entry Text="{Binding BloodVolumeFraction, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" WidthRequest="70"
                         HorizontalOptions="CenterAndExpand" 
                         Placeholder="Number"
                         FontSize="13"/>
-                <Entry Text="{Binding StO2, Mode=TwoWay}" Grid.Column="2" Grid.Row="1"
+                <Entry Text="{Binding StO2, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" WidthRequest="70"
                         HorizontalOptions="CenterAndExpand" 
                         Placeholder="Number"
                         FontSize="13"/>
