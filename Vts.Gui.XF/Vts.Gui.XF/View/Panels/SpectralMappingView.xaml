@@ -17,26 +17,29 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
                     <!-- Picker -->
-                    <RowDefinition Height="160" />
+                    <RowDefinition Height="180" />
                     <!-- Absorber Conc -->
                     <RowDefinition Height="160" />
                     <!-- Blood Conc -->
                     <RowDefinition Height="160" />
                     <!-- Scat Type -->
                 </Grid.RowDefinitions>
-                <!-- Tissue Types -->
-                <Picker Grid.Column="0" Grid.Row="0" Title="{Binding TissueTypesLabel}"
+                <!-- Tissue Types CKH: Title binding problem -->
+                <Picker Grid.Column="0" Grid.Row="0" Title="{Binding TissueTypesLabel}" FontSize="13" 
                     ItemsSource="{Binding Tissues}"
                     SelectedItem="{Binding SelectedTissue, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding Name}" 
-                    HeightRequest="50"/>
+                    HeightRequest="80"/>
                 <!-- Absorber Concentrations -->
                 <ListView Grid.Column="0" Grid.Row="1"
                     ItemsSource="{Binding SelectedTissue.Absorbers}"
                     VerticalOptions="FillAndExpand"
                     IsPullToRefreshEnabled="true"
-                    CachingStrategy="RecycleElement"
-                    Header="{Binding AbsorberConcentrationLabel}">
+                    CachingStrategy="RecycleElement">
+                    <ListView.Header>
+                        <Label Text="{Binding AbsorberConcentrationsLabel}" 
+                               FontSize="13"/>
+                    </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

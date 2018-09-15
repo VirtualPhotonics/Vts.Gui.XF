@@ -115,12 +115,17 @@ namespace Vts.Gui.XF.ViewModel
 
         //public RelayCommand<object> ResetConcentrations { get; set; }
         //public RelayCommand<object> UpdateWavelength { get; set; }
-        public ICommand PlotMuaSpectrumCommand { get; set; }       
+        public ICommand PlotMuaSpectrumCommand { get; set; }
         //public RelayCommand PlotMuspSpectrumCommand { get; set; }
 
-        public ObservableCollection<string> TissueTypesLabel
+        //public ObservableCollection<string> TissueTypesLabel
+        //{
+        //    get { return new ObservableCollection<string>() {StringLookup.GetLocalizedString("Label_TissueTypes")}; }
+        //}
+        // CKH modified ObservableCollection<string> to string to get binding to work
+        public string TissueTypesLabel
         {
-            get { return new ObservableCollection<string>() {StringLookup.GetLocalizedString("Label_TissueTypes")}; }
+            get { return StringLookup.GetLocalizedString("Label_TissueTypes"); }
         }
 
         public string AbsorberConcentrationsLabel

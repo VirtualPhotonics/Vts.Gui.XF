@@ -5,12 +5,13 @@
     <Grid x:Name="LayoutRoot">
         <StackLayout Orientation="Vertical">
             <!-- Blood Concentration Labels -->
-            <Label Text="{Binding BloodConcentrationlabel}"  />
+            <Label Text="{Binding BloodConcentrationLabel}" 
+                   FontSize="13"/>
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="95" />
-                    <ColumnDefinition Width="95" />
-                    <ColumnDefinition Width="95" />
+                    <ColumnDefinition Width="80" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
@@ -19,23 +20,23 @@
 
                 <Label Text="{Binding TotalHbLabel}" Grid.Column="0" Grid.Row="0"
                         LineBreakMode="NoWrap" 
-                        FontSize="13"/>
+                        FontSize="10"/>
                 <Label Text="{Binding BloodVolumeLabel}" Grid.Column="1" Grid.Row="0"
-                        LineBreakMode="CharacterWrap"
-                        FontSize="13"/>
+                        LineBreakMode="NoWrap"
+                        FontSize="10"/>
                 <Label Text="{Binding StO2Label}" Grid.Column="2" Grid.Row="0"
                         LineBreakMode="NoWrap"
-                        FontSize="13"/>
+                        FontSize="10"/>
                 <Entry Text="{Binding TotalHb, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" WidthRequest="70"
-                       HorizontalOptions="CenterAndExpand" 
+                       HorizontalOptions="StartAndExpand" 
                        Placeholder="Number"
                        FontSize="13"/>
                 <Entry Text="{Binding BloodVolumeFraction, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" WidthRequest="70"
-                        HorizontalOptions="CenterAndExpand" 
+                        HorizontalOptions="StartAndExpand" 
                         Placeholder="Number"
                         FontSize="13"/>
                 <Entry Text="{Binding StO2, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" WidthRequest="70"
-                        HorizontalOptions="CenterAndExpand" 
+                        HorizontalOptions="StartAndExpand" 
                         Placeholder="Number"
                         FontSize="13"/>
               
