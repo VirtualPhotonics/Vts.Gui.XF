@@ -15,7 +15,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="35" />
                 </Grid.RowDefinitions>
 
                 <Label Text="{Binding TotalHbLabel}" Grid.Column="0" Grid.Row="0"
