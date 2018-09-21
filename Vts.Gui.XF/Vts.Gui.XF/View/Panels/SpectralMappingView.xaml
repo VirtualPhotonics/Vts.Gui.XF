@@ -27,7 +27,7 @@
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
                 <!-- Tissue Types  -->
-                <Picker Grid.Column="0" Grid.Row="0" Title="{Binding TissueTypesLabel}" FontSize="13" 
+                <Picker Grid.Column="0" Grid.Row="0" Title="{Binding TissueTypesLabel}" 
                     ItemsSource="{Binding Tissues}"
                     SelectedItem="{Binding SelectedTissue, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding Name}" 
@@ -91,7 +91,7 @@
 
                 <Picker Grid.Column="0" Grid.Row="3" 
                         BindingContext="{Binding ScatteringTypeVM}"
-                        Title="{Binding GroupName}" FontSize="13" 
+                        Title="{Binding GroupName}" 
                         ItemsSource="{Binding SelectedDisplayNames}"
                         SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}" 
                         HeightRequest="50"/>

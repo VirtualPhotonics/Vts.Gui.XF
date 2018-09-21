@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using Vts.SpectralMapping;
 //using GalaSoft.MvvmLight.Command;
 using Vts.Common;
 using Vts.Factories;
 using Vts.Gui.XF.Extensions;
-using Vts.Gui.XF.Model;
-using Vts.Gui.XF.View;
 using Vts.SpectralMapping;
 using Xamarin.Forms;
 
