@@ -32,6 +32,9 @@ namespace Vts.Gui.XF.ViewModel
         private List<Tissue> _tissues;
         private double _wavelength;
         private RangeViewModel _wavelengthRangeVM;
+        private bool _displayIntralipidScatterer;
+        private bool _displayPowerLawScatterer;
+        private bool _displayMieScatterer;
 
         public SpectralMappingViewModel()
         {
@@ -234,7 +237,13 @@ namespace Vts.Gui.XF.ViewModel
                     BloodConcentrationVM.DisplayBloodVM = true;
                 }
                 else
+                {
                     BloodConcentrationVM.DisplayBloodVM = false;
+                }
+                // set xaml to be shown based on Tissue
+                DisplayIntralipidScatterer = _selectedTissue.Scatterer.ScattererType == ScatteringType.Intralipid;
+                DisplayPowerLawScatterer = _selectedTissue.Scatterer.ScattererType == ScatteringType.PowerLaw;
+                DisplayMieScatterer = _selectedTissue.Scatterer.ScattererType == ScatteringType.Mie;
             }
         }
 
@@ -300,7 +309,33 @@ namespace Vts.Gui.XF.ViewModel
                 OnPropertyChanged("N");
             }
         }
-
+        public bool DisplayIntralipidScatterer
+        {
+            get { return _displayIntralipidScatterer; }
+            set
+            {
+                _displayIntralipidScatterer = value;
+                OnPropertyChanged("DisplayIntralipidScatterer");
+            }
+        }
+        public bool DisplayPowerLawScatterer
+        {
+            get { return _displayPowerLawScatterer; }
+            set
+            {
+                _displayPowerLawScatterer = value;
+                OnPropertyChanged("DisplayPowerLawScatterer");
+            }
+        }
+        public bool DisplayMieScatterer
+        {
+            get { return _displayMieScatterer; }
+            set
+            {
+                _displayMieScatterer = value;
+                OnPropertyChanged("DisplayMieScatterer");
+            }
+        }
         public RangeViewModel WavelengthRangeVM
         {
             get { return _wavelengthRangeVM; }

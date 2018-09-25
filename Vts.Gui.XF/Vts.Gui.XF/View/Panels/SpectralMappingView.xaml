@@ -22,7 +22,7 @@
                     <!-- Scat Type -->
                     <RowDefinition Height="60" />
                     <!-- Scat Data -->
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="40"/>
                     <!-- plot mua button -->
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
@@ -90,64 +90,40 @@
                 <!-- CKH question: can I bypass RadioButtonOptionView - it has many constructs not supported by XF -->
 
                 <Picker Grid.Column="0" Grid.Row="3" 
-                        BindingContext="{Binding ScatteringTypeVM}"
-                        Title="{Binding GroupName}" 
-                        ItemsSource="{Binding SelectedDisplayNames}"
-                        SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}" 
+                        Title="{Binding ScatteringTypeVM.GroupName}" 
+                        ItemsSource="{Binding ScatteringTypeVM.SelectedDisplayNames}"
+                        SelectedItem="{Binding ScatterType.Scatterer, Mode=TwoWay}" 
+                        SelectedIndex="{Binding ScatteringTypeVM.SelectedDisplayName, Mode=TwoWay}"
                         HeightRequest="50"/>
-                <!--<Grid.Resources Grid.Column="0" Grid.Row="4">
-                    <ResourceDictionary>
-                        --><!-- Intralipid parameters -->
-                    <!--<view:ScatteringTemplateSelector.IntralipidScatteringTemplate>--><!--
-                        <DataTemplate x:Key="IntralipidScatteringTemplate">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding VolumeFractionLabel}"  />
-                                <Label Text=" = "  />
-                                <Entry Text="{Binding Scatterer.VolumeFraction, Mode=TwoWay}" Width="40" />
-                            </StackLayout>
-                        </DataTemplate>
-                    --><!--</view:ScatteringTemplateSelector.IntralipidScatteringTemplate>-->
-                    <!-- Powerlaw parameters -->
-                    <!--<view:ScatteringTemplateSelector.PowerLawScatteringTemplate>--><!--
-                        <DataTemplate x:Key="PowerLawScatteringTemplate">
-                        <StackLayout Orientation="Vertical">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding ValueALabel}"  />
-                                <Label Text="A=" />
-                                <Entry Text="{Binding Scatterer.A, Mode=TwoWay}" WidthRequest="70" />
-                                <Label Text="{Binding ValueBLabel}" />
-                                <Label Text="b=" Margin="2,0,2,0" />
-                                <Entry Text="{Binding Scatterer.B, Mode=TwoWay}" WidthRequest="70" />
-                                <Label Text="{Binding PowerLawDefinitionALabel}" />
-                            </StackLayout>
-                        </StackLayout>
-                    </DataTemplate>
+                <!-- Intralipid Scatterer view -->
+                <StackLayout Grid.Column="0" Grid.Row="4"  Orientation="Horizontal" IsVisible="{Binding DisplayIntralipidScatterer}">
+                    <Label Text="{Binding VolumeFractionLabel}"  />
+                    <Label Text="="  />
+                    <Entry Text="{Binding Scatterer.VolumeFraction, Mode=TwoWay}" />
+                </StackLayout>
+                <!-- Power Law Scatterer view -->
+                <StackLayout Grid.Column="0" Grid.Row="4" Orientation="Horizontal" IsVisible="{Binding DisplayPowerLawScatterer}">
+                    <Label Text="{Binding ValueALabel}"  />
+                    <Label Text="=" />
+                    <Entry Text="{Binding Scatterer.A, Mode=TwoWay}" WidthRequest="70" />
+                    <Label Text="{Binding ValueBLabel}" />
+                    <Label Text="=" />
+                    <Entry Text="{Binding Scatterer.B, Mode=TwoWay}" WidthRequest="70" />
+                    <Label Text="{Binding PowerLawDefinitionALabel}" />
+                </StackLayout>
+                <!-- Mie Scatterer view -->
+                <StackLayout Grid.Column="0" Grid.Row="4" Orientation="Horizontal" IsVisible="{Binding DisplayMieScatterer}">
+                    <Label Text="{Binding ParticleRadiusLabel}"  />
+                    <Label Text="="/>
+                    <Entry Text="{Binding Scatterer.ParticleRadius, Mode=TwoWay}"/>
+                    <Label Text="{Binding ParticleNLabel}"  />
+                    <Label Text="=" />
+                    <Entry Text="{Binding Scatterer.ParticleRefractiveIndexMismatch, Mode=TwoWay}" />
+                    <Label Text="{Binding MediumNLabel}"  />
+                    <Label Text="="  />
+                    <Entry Text="{Binding Scatterer.MediumRefractiveIndexMismatch, Mode=TwoWay}" />
+                </StackLayout>
 
-                    --><!--</view:ScatteringTemplateSelector.PowerLawScatteringTemplate>-->
-                    <!-- Mie Scatterer parameters -->
-                    <!--
-                        <view:ScatteringTemplateSelector.MieScatteringTemplate>
-                                <DataTemplate x:Key="MieScatteringTemplate">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding ParticleRadiusLabel}"  />
-                                        <Label Text="="/>
-                                        <Entry Text="{Binding Scatterer.ParticleRadius, Mode=TwoWay}" Width="40" />
-                                        <Label Text="{Binding ParticleNLabel}"  />
-                                        <Label Text="=" />
-                                        <Entry Text="{Binding Scatterer.ParticleRefractiveIndexMismatch, Mode=TwoWay}"
-                                       Width="40" />
-                                        <Label Text="{Binding MediumNLabel}"  />
-                                        <Label Text="="  />
-                                        <Entry Text="{Binding Scatterer.MediumRefractiveIndexMismatch, Mode=TwoWay}"
-                                       Width="40" />
-                                    </StackLayout>
-                                </DataTemplate>--><!--
-                        <view:ScatteringTemplateSelector
-                            x:Key="ScatteringTemplateSelector"
-                            IntralipidScatteringTemplate="{StaticResource IntralipidScatteringTemplate}"
-                            PowerLawScatteringTemplate="{StaticResource PowerLawScatteringTemplate}"/>
-                    </ResourceDictionary>
-                </Grid.Resources>-->
             </Grid>
                 <!-- Wavelength Range -->
             <!--<StackLayout Orientation="Vertical" Margin="0,10,0,0">

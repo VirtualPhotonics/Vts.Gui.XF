@@ -51,8 +51,5 @@
     <EmbeddedResource Update="View\Panels\SubPanels\BloodConcentrationView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Templates\PowerLawScatteringView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>
