@@ -172,10 +172,10 @@
 
             <!-- Plot Buttons -->
             <!-- Buttons need to be inside Grid -->
-            <!--<Button Grid.Column="0" Grid.Row="4"  Text="{Binding PlotMuaButtonLabel}"
+            <Button Grid.Column="0" Grid.Row="5"  Text="{Binding PlotMuaButtonLabel}"
                         Clicked="OnPlotMuaSpectrumButton_Clicked"
                         VerticalOptions="End"
-                        FontSize="13"/>-->
+                        FontSize="13"/>
         
 
             <!--<Button
