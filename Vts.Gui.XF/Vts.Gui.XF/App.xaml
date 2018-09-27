@@ -4,8 +4,10 @@
              xmlns:converters="clr-namespace:Vts.Gui.XF.Converters"
              x:Class="Vts.Gui.XF.App">
     <Application.Resources>
-        <!--<ResourceDictionary>
-        Don't need BooleanToVisibilityConverter since IsVisible already boolean
-        </ResourceDictionary>-->
+        <ResourceDictionary>
+        <!--Don't need BooleanToVisibilityConverter since IsVisible already boolean-->
+            <converters:ResourceToStringConverter x:Key="MyResourceToStringConverter" />
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

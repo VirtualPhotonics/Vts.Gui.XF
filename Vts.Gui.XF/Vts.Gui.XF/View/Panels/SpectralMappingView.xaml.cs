@@ -28,6 +28,10 @@ namespace Vts.Gui.XF.View
         {
             await Navigation.PushAsync(new PlotView());                
         }
+        //async void OnUpdateWavelengthButton_Clicked(object sender, EventArgs args)
+        //{
+        //    await this.viewModel.UpdateWavelengthCommand(sender);
+        //}
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             //var panel = args.SelectedItem as Item

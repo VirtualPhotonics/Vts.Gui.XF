@@ -33,21 +33,6 @@ namespace Vts.Gui.XF.ViewModel
             get { return StringLookup.GetLocalizedString("Label_BloodConcentration"); }
         }
 
-        public string TotalHbLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_TotalHb"); }
-        }
-
-        public string BloodVolumeLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_BloodVolume"); }
-        }
-
-        public string StO2Label
-        {
-            get { return StringLookup.GetLocalizedString("Label_StO2"); }
-        }
-
         /// <summary>
         ///     ChromophoreAbsorber representing the concentration of oxy-hemoglobin (uM)
         /// </summary>

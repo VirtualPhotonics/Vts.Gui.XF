@@ -82,7 +82,7 @@ namespace Vts.Gui.XF.ViewModel
                 new Tissue(TissueType.Custom)
             };
 
-                       BloodConcentrationVM = new BloodConcentrationViewModel();
+            BloodConcentrationVM = new BloodConcentrationViewModel();
 
             //            #region DC notes 1
 
@@ -93,85 +93,30 @@ namespace Vts.Gui.XF.ViewModel
 
             //            #endregion
 
-                        BloodConcentrationVM.PropertyChanged += (sender, args) => UpdateOpticalProperties();
+            BloodConcentrationVM.PropertyChanged += (sender, args) => UpdateOpticalProperties();
 
-                        SelectedTissue = Tissues.First();
-                        ScatteringTypeVM.SelectedValue = SelectedTissue.ScattererType;
-                        // forces update to all bindings established in hanlder for ScatteringTypeVM.PropertyChanged above
-                        ScatteringTypeName = SelectedTissue.GetType().FullName;
-                        OpticalProperties = new OpticalProperties(0.01, 1, 0.8, 1.4);
-                        Wavelength = 650;
+            SelectedTissue = Tissues.First();
+            ScatteringTypeVM.SelectedValue = SelectedTissue.ScattererType;
+            // forces update to all bindings established in hanlder for ScatteringTypeVM.PropertyChanged above
+            ScatteringTypeName = SelectedTissue.GetType().FullName;
+            OpticalProperties = new OpticalProperties(0.01, 1, 0.8, 1.4);
+            Wavelength = 650;
 
             //            ResetConcentrations = new RelayCommand<object>(ResetConcentrations_Executed);
-            //            UpdateWavelength = new RelayCommand<object>(UpdateWavelength_Executed);
+            UpdateWavelengthCommand = new Command(OnUpdateWavelengthCommand);
             //PlotMuaSpectrumCommand = new RelayCommand(PlotMuaSpectrum_Executed);
             PlotMuaSpectrumCommand = new Command(async () => await OnPlotMuaSpectrumCommand());
             //PlotMuspSpectrumCommand = new RelayCommand(PlotMuspSpectrum_Executed);
         }
 
         //public RelayCommand<object> ResetConcentrations { get; set; }
-        //public RelayCommand<object> UpdateWavelength { get; set; }
+        public ICommand UpdateWavelengthCommand { get; set; }
         public ICommand PlotMuaSpectrumCommand { get; set; }
         //public RelayCommand PlotMuspSpectrumCommand { get; set; }
-
-        //public ObservableCollection<string> TissueTypesLabel
-        //{
-        //    get { return new ObservableCollection<string>() {StringLookup.GetLocalizedString("Label_TissueTypes")}; }
-        //}
-        // CKH modified ObservableCollection<string> to string to get binding to work
-        public string TissueTypesLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_TissueTypes"); }
-        }
-
-        public string AbsorberConcentrationsLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_AbsorberConcentrations"); }
-        }
 
         public string ScattererTypeLabel
         {
             get { return StringLookup.GetLocalizedString("Heading_ScattererType"); }
-        }
-
-        public string VolumeFractionLabel
-        {
-            get { return StringLookup.GetLocalizedString("Value_VolumeFraction"); }
-        }
-
-        public string ParticleRadiusLabel
-        {
-            get { return StringLookup.GetLocalizedString("Value_ParticleRadius"); }
-        }
-
-        public string ParticleNLabel
-        {
-            get { return StringLookup.GetLocalizedString("Value_ParticleN"); }
-        }
-
-        public string MediumNLabel
-        {
-            get { return StringLookup.GetLocalizedString("Value_MediumN"); }
-        }
-
-        public string ValueALabel
-        {
-            get { return StringLookup.GetLocalizedString("Value_A"); }
-        }
-
-        public string ValueBLabel
-        {
-            get { return StringLookup.GetLocalizedString("Value_b"); }
-        }
-
-        public string PowerLawDefinitionALabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_PowerLawDefinitionA"); }
-        }
-
-        public string PlotMuaButtonLabel
-        {
-            get { return StringLookup.GetLocalizedString("Button_PlotMua"); }
         }
 
         public string PlotMusPrimeButtonLabel
@@ -444,13 +389,13 @@ namespace Vts.Gui.XF.ViewModel
         //        StringLookup.GetLocalizedString("Message_PlotMuSPrimeSpectrum") + "[" + minWavelength + ", " + maxWavelength + "]\r");
         //}
 
-        //private void UpdateWavelength_Executed(object sender)
-        //    // updates when solution domain is involved in spectral feedback
-        //{
-        //    _wavelength = (double) sender;
-        //    UpdateOpticalProperties();
-        //    OnPropertyChanged("Wavelength");
-        //}
+        private void OnUpdateWavelengthCommand()  // used to be (object sender)
+        // updates when solution domain is involved in spectral feedback
+        {
+            //_wavelength = (double)sender;
+            UpdateOpticalProperties();
+            OnPropertyChanged("Wavelength");
+        }
 
         #region DC notes 2
 
