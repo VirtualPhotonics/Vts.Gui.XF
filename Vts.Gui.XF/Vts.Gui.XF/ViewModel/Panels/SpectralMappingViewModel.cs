@@ -103,7 +103,7 @@ namespace Vts.Gui.XF.ViewModel
             Wavelength = 650;
 
             //            ResetConcentrations = new RelayCommand<object>(ResetConcentrations_Executed);
-            UpdateWavelengthCommand = new Command(OnUpdateWavelengthCommand);
+            //UpdateWavelengthCommand = new Command(OnUpdateWavelengthCommand);
             //PlotMuaSpectrumCommand = new RelayCommand(PlotMuaSpectrum_Executed);
             PlotMuaSpectrumCommand = new Command(async () => await OnPlotMuaSpectrumCommand());
             //PlotMuspSpectrumCommand = new RelayCommand(PlotMuspSpectrum_Executed);
@@ -389,13 +389,15 @@ namespace Vts.Gui.XF.ViewModel
         //        StringLookup.GetLocalizedString("Message_PlotMuSPrimeSpectrum") + "[" + minWavelength + ", " + maxWavelength + "]\r");
         //}
 
-        private void OnUpdateWavelengthCommand()  // used to be (object sender)
-        // updates when solution domain is involved in spectral feedback
-        {
-            //_wavelength = (double)sender;
-            UpdateOpticalProperties();
-            OnPropertyChanged("Wavelength");
-        }
+        // this may be obsolete because binding of Wavelength updates OPs
+        //private void OnUpdateWavelengthCommand()  // used to be (object sender)
+        //// updates when solution domain is involved in spectral feedback
+        //{
+        //    //_wavelength = (double)sender;
+        //    //_wavelength = Wavelength;
+        //    UpdateOpticalProperties();
+        //    OnPropertyChanged("Wavelength");
+        //}
 
         #region DC notes 2
 

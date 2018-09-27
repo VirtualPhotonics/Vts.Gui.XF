@@ -24,7 +24,7 @@
                     <!-- Scat Data section -->
                     <RowDefinition Height="35"/>
                     <!-- single wavelength title -->
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="25" />
                     <!-- single wavelength section -->
                     <RowDefinition Height="35" />
                     <!-- plot mua button -->
@@ -131,25 +131,28 @@
                 <Label Grid.Column="0" Grid.Row="5"  
                        Text="{Binding ConverterParameter=Label_Calculator, Converter={StaticResource MyResourceToStringConverter}}" />
                 <StackLayout Grid.Column="0" Grid.Row="6"  Orientation="Horizontal">
-                     <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding ConverterParameter=Label_Atnm, 
-                            Converter={StaticResource MyResourceToStringConverter}}" 
-                            WidthRequest="100"/>
-                        <Entry Text="{Binding Wavelength, Mode=TwoWay}"/>
-                    </StackLayout>
-                    <Button Text="{Binding ConverterParameter=Button_Update, Converter={StaticResource MyResourceToStringConverter}}" 
-                            Command="{Binding UpdateWavelengthCommand}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="160" />
-                            <ColumnDefinition Width="160" />
+                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="300" />
                         </Grid.ColumnDefinitions>
-                        <StackLayout Grid.Column="0" Orientation="Horizontal">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35" />
+                            <RowDefinition Height="35" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding ConverterParameter=Label_Atnm, 
+                            Converter={StaticResource MyResourceToStringConverter}}" />
+                            <Entry Grid.Column="1" Grid.Row="0"  Text="{Binding Wavelength, Mode=TwoWay}"/>
+                        </StackLayout>
+                        <!--<Button Text="{Binding ConverterParameter=Button_Update, Converter={StaticResource MyResourceToStringConverter}}" 
+                            Command="{Binding UpdateWavelengthCommand}" />-->
+                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                             <Label Text="{Binding ConverterParameter=Label_MuA, Converter={StaticResource MyResourceToStringConverter}}" />
                             <Label Text="[1/mm] = " />
                             <Label Text="{Binding Mua, ConverterParameter=g3}" WidthRequest="25"/>
                         </StackLayout>
-                        <StackLayout Grid.Column="1" Orientation="Horizontal">
+                        <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
                             <Label Text="{Binding ConverterParameter=Label_MuSPrime, Converter={StaticResource MyResourceToStringConverter}}"/>
                             <Label Text="[1/mm] = " />
                             <Label Text="{Binding Musp, ConverterParameter=g3}" WidthRequest="25"/>

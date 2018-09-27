@@ -5,7 +5,7 @@
     <Grid x:Name="LayoutRoot">
         <StackLayout Orientation="Vertical">
             <!-- Blood Concentration Labels -->
-            <Label Text="{Binding BloodConcentrationLabel}" 
+            <Label Text="{Binding ConverterParameter=Label_BloodConcentration, Converter={StaticResource MyResourceToStringConverter}}" 
                    FontSize="13"/>
             <Grid>
                 <Grid.ColumnDefinitions>
