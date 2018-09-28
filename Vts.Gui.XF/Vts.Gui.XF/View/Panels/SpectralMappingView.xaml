@@ -133,8 +133,8 @@
                 <StackLayout Grid.Column="0" Grid.Row="6"  Orientation="Horizontal">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="250" />
-                            <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="150" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35" />
@@ -150,12 +150,12 @@
                         <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                             <Label Text="{Binding ConverterParameter=Label_MuA, Converter={StaticResource MyResourceToStringConverter}}" />
                             <Label Text="[1/mm] = " />
-                            <Label Text="{Binding Mua, ConverterParameter=g3}" WidthRequest="25"/>
+                            <Label Text="{Binding Mua, ConverterParameter=g3, StringFormat='{}{0:F4}'}" />
                         </StackLayout>
                         <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
                             <Label Text="{Binding ConverterParameter=Label_MuSPrime, Converter={StaticResource MyResourceToStringConverter}}"/>
                             <Label Text="[1/mm] = " />
-                            <Label Text="{Binding Musp, ConverterParameter=g3}" WidthRequest="25"/>
+                            <Label Text="{Binding Musp, ConverterParameter=g3, StringFormat='{}{0:F4}'}"/>
                         </StackLayout>
                     </Grid>
                 </StackLayout>
