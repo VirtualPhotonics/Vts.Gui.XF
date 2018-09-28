@@ -27,6 +27,8 @@
                     <RowDefinition Height="25" />
                     <!-- single wavelength section -->
                     <RowDefinition Height="35" />
+                    <!-- multi wavelength section -->
+                    <RowDefinition Height="35" />
                     <!-- plot mua button -->
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
@@ -133,26 +135,24 @@
                 <StackLayout Grid.Column="0" Grid.Row="6"  Orientation="Horizontal">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="150" />
                             <ColumnDefinition Width="150" />
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="35" />
-                            <RowDefinition Height="35" />
-                        </Grid.RowDefinitions>
                         <StackLayout Orientation="Horizontal">
-                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding ConverterParameter=Label_Atnm, 
+                            <Label Grid.Column="0" Text="{Binding ConverterParameter=Label_Atnm, 
                             Converter={StaticResource MyResourceToStringConverter}}" />
-                            <Entry Grid.Column="1" Grid.Row="0"  Text="{Binding Wavelength, Mode=TwoWay}"/>
+                            <Entry Grid.Column="1" Text="{Binding Wavelength, Mode=TwoWay}"/>
                         </StackLayout>
                         <!--<Button Text="{Binding ConverterParameter=Button_Update, Converter={StaticResource MyResourceToStringConverter}}" 
                             Command="{Binding UpdateWavelengthCommand}" />-->
-                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                        <StackLayout Grid.Column="2" Orientation="Horizontal">
                             <Label Text="{Binding ConverterParameter=Label_MuA, Converter={StaticResource MyResourceToStringConverter}}" />
                             <Label Text="[1/mm] = " />
                             <Label Text="{Binding Mua, ConverterParameter=g3, StringFormat='{}{0:F4}'}" />
                         </StackLayout>
-                        <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                        <StackLayout Grid.Column="3" Orientation="Horizontal">
                             <Label Text="{Binding ConverterParameter=Label_MuSPrime, Converter={StaticResource MyResourceToStringConverter}}"/>
                             <Label Text="[1/mm] = " />
                             <Label Text="{Binding Musp, ConverterParameter=g3, StringFormat='{}{0:F4}'}"/>
@@ -160,13 +160,13 @@
                     </Grid>
                 </StackLayout>
                 <!-- Multi-λ Calculator -->
-                <!--<StackLayout Orientation="Horizontal" >
-                            <view:RangeView DataContext="{Binding WavelengthRangeVM}" Margin="0,3,0,0"
-                                        VerticalAlignment="Top" />-->
+                <StackLayout Grid.Column="0" Grid.Row="7"  Orientation="Horizontal" >
+                    <view:RangeView BindingContext="{Binding WavelengthRangeVM}" />
+                </StackLayout>
 
-            <!-- Plot Buttons -->
+                <!-- Plot Buttons -->
             <!-- Buttons need to be inside Grid -->
-                <Button Grid.Column="0" Grid.Row="7"  Text="{Binding ConverterParameter=Button_PlotMua, Converter={StaticResource MyResourceToStringConverter}}"
+                <Button Grid.Column="0" Grid.Row="8"  Text="{Binding ConverterParameter=Button_PlotMua, Converter={StaticResource MyResourceToStringConverter}}"
                         Clicked="OnPlotMuaSpectrumButton_Clicked"
                         VerticalOptions="End"
                         FontSize="13"/>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Vts.Gui.XF.View.RangeView">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0"  Text="{Binding Title}"
+                   IsVisible="{Binding ShowTitle}" />
+        <StackLayout x:Name="LayoutRoot" Orientation="Horizontal" Grid.Row="1">
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="0">
+                    <Label Text="{Binding ConverterParameter=Range_Begin, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Label Text=" [" />
+                    <Label Text="{Binding Units}" />
+                    <Label Text="]" />
+                </StackLayout>
+                <Entry Grid.Column="0"  Text="{Binding Start, Mode=TwoWay}" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="1">
+                    <Label Text="{Binding ConverterParameter=Range_End}" />
+                    <Label Text=" [" />
+                    <Label Text="{Binding Units}" />
+                    <Label Text="]" />
+                </StackLayout>
+                <Entry Grid.Column="1"  Text="{Binding Stop, Mode=TwoWay}" HorizontalOptions="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center" Grid.Column="2"
+                        IsVisible="{Binding EnableNumber}">
+                <Label Text="{Binding ConverterParameter=Range_Number, Converter={StaticResource MyResourceToStringConverter}}" />
+                <Entry Grid.Column="2" Text="{Binding Number, Mode=TwoWay}"  />
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentView>
