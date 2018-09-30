@@ -24,7 +24,7 @@ namespace Vts.Gui.XF.View
             // basically sets height of stackLayout = 0 equiv to isVisible=false, =-1 equiv to isVisible=true 
             section.HeightRequest = isVisible ? -1d : 0;
         }
-        async void OnPlotMuaSpectrumButton_Clicked(object sender, EventArgs args)
+        async void OnPlotButton_Clicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new PlotView());
         }

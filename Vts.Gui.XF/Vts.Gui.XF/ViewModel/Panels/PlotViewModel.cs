@@ -80,7 +80,7 @@ namespace Vts.Gui.XF.ViewModel
         private double _MaxYValue;
         private double _MinXValue;
         private double _MinYValue;
-        private PlotModel _plotModel;
+        private ViewResolvingPlotModel _plotModel;
         //private OptionViewModel<PlotNormalizationType> _PlotNormalizationTypeOptionVM;
         private PlotPointCollection _PlotSeriesCollection;
         private IList<string> _PlotTitles;
@@ -117,7 +117,7 @@ namespace Vts.Gui.XF.ViewModel
             PlotSeriesCollection = new PlotPointCollection();
             //IsComplexPlot = false;
 
-            PlotModel = new PlotModel
+            PlotModel = new ViewResolvingPlotModel
             {
                 Title = "",
                 LegendPlacement = LegendPlacement.Outside,
@@ -274,7 +274,7 @@ namespace Vts.Gui.XF.ViewModel
         private IList<string> PhaseLabels { get; set; }
         private IList<string> AmplitudeLabels { get; set; }
 
-        public PlotModel PlotModel
+        public ViewResolvingPlotModel PlotModel
         {
             get { return _plotModel; }
             set

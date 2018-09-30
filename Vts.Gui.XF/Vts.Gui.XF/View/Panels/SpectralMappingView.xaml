@@ -168,13 +168,14 @@
             <!-- Buttons need to be inside Grid -->
                 <Button Grid.Column="0" Grid.Row="8"  Text="{Binding ConverterParameter=Button_PlotMua, Converter={StaticResource MyResourceToStringConverter}}"
                         Command="{Binding PlotMuaSpectrumCommand}"
+                        Clicked="OnPlotButton_Clicked"
                         VerticalOptions="End"
                         FontSize="13"/>
 
 
                 <Button Grid.Column="0" 
                         Grid.Row="9"
-                        Clicked="OnPlotMuaSpectrumButton_Clicked"
+                        Clicked="OnPlotButton_Clicked"
                         Text="Plot View"
                         VerticalOptions="End"
                         FontSize="13" />
