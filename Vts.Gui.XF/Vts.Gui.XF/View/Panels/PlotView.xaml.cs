@@ -16,7 +16,7 @@ namespace Vts.Gui.XF.View
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new PlotViewModel();
+            BindingContext = viewModel = PanelsListViewModel.Current.PlotVM; //new PlotViewModel();
         }
 
 

@@ -7,6 +7,8 @@ using System.Windows.Input;
 using Vts.Common;
 using Vts.Factories;
 using Vts.Gui.XF.Extensions;
+using Vts.Gui.XF.Model;
+using Vts.Gui.XF.View;
 using Vts.SpectralMapping;
 using Xamarin.Forms;
 
@@ -340,15 +342,16 @@ namespace Vts.Gui.XF.ViewModel
             //WindowViewModel.Current.PlotVM.SetAxesLabels.Execute(axesLabels);
             ////Commands.Plot_SetAxesLabels.Execute(axesLabels, null);
 
-            //var tissue = SelectedTissue;
-            //var wavelengths = WavelengthRangeVM.Values.ToArray();
-            //var points = new Point[wavelengths.Length];
-            //for (var wvi = 0; wvi < wavelengths.Length; wvi++)
-            //{
-            //    var wavelength = wavelengths[wvi];
-            //    points[wvi] = new Point(wavelength, tissue.GetMua(wavelength));
-            //}
+            var tissue = SelectedTissue;
+            var wavelengths = WavelengthRangeVM.Values.ToArray();
+            var points = new Point[wavelengths.Length];
+            for (var wvi = 0; wvi < wavelengths.Length; wvi++)
+            {
+                var wavelength = wavelengths[wvi];
+                points[wvi] = new Point(wavelength, tissue.GetMua(wavelength));
+            }
             //WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] { new PlotData(points, StringLookup.GetLocalizedString("Label_MuASpectra")) });
+            PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[] { new PlotData(points, StringLookup.GetLocalizedString("Label_MuASpectra")) });
 
             //var minWavelength = WavelengthRangeVM.Values.Min();
             //var maxWavelength = WavelengthRangeVM.Values.Max();

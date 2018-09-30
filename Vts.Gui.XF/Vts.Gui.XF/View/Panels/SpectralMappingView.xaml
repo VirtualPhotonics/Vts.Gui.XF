@@ -167,15 +167,17 @@
                 <!-- Plot Buttons -->
             <!-- Buttons need to be inside Grid -->
                 <Button Grid.Column="0" Grid.Row="8"  Text="{Binding ConverterParameter=Button_PlotMua, Converter={StaticResource MyResourceToStringConverter}}"
-                        Clicked="OnPlotMuaSpectrumButton_Clicked"
+                        Command="{Binding PlotMuaSpectrumCommand}"
                         VerticalOptions="End"
                         FontSize="13"/>
-        
 
-            <!--<Button
-                            Command="{Binding PlotMuspSpectrumCommand}"
-                            Margin="10,2,0,0" Height="25" 
-                            Clicked="{Binding PlotMusPrimeButtonLabel}" />-->
+
+                <Button Grid.Column="0" 
+                        Grid.Row="9"
+                        Clicked="OnPlotMuaSpectrumButton_Clicked"
+                        Text="Plot View"
+                        VerticalOptions="End"
+                        FontSize="13" />
 
 
             </Grid>

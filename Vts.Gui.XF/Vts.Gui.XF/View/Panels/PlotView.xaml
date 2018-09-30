@@ -4,23 +4,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
              Title="Plots:">
-    <!--<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="250" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="145" />
-        </Grid.RowDefinitions>-->
+    <ScrollView>
+        <oxy:PlotView x:Name="MyChart" 
+                      Model="{Binding PlotModel}"
+                      VerticalOptions="Center" HorizontalOptions="Center"/>
+
         <!-- Chart control for the plot -->
         <!--<oxy:PlotView x:Name="MyChart" Grid.Row="0" Model="{Binding PlotModel}" MinHeight="460" MinWidth="515" />-->
-        <ContentPage.Content>
-            <AbsoluteLayout>
-                <oxy:PlotView x:Name="MyChart" 
-                              Model="{Binding PlotModel}"
-                              AbsoluteLayout.LayoutBounds="20,0,.9,.9"
-                              AbsoluteLayout.LayoutFlags="WidthProportional,HeightProportional"/>
-            </AbsoluteLayout>
-        </ContentPage.Content>
-
         <!-- Hide legend checkbox -->
         <!--<CheckBox Grid.Row="1"
                   HorizontalAlignment="Right"
@@ -31,14 +21,18 @@
         <!--<Image Grid.Row="2" Source="/Vts.Gui.XF;Component/Resources/Images/logo-small.png" Height="50" Stretch="None" />
         <StackLayout Grid.Row="2" Orientation="Vertical" MinWidth="515" MinHeight="135" Height="115" Margin="10"
                     VerticalAlignment="Top" HorizontalAlignment="Center" Background="White">-->
-            <!--<StackLayout Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+        <!--<StackLayout Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
                 <StackLayout Orientation="Vertical" VerticalAlignment="Top" Margin="2,0,10,0">
-                    --><!-- Hold on checkbox --><!--
+                    -->
+        <!-- Hold on checkbox -->
+        <!--
                     <CheckBox Content="{Binding HoldOnLabel}"
                               IsChecked="{Binding HoldOn, Mode=TwoWay}"
                               Visibility="{Binding ShowInPlotView, Converter={StaticResource MyBooleanToVisibilityConverter}}"
                               Margin="0,5,0,0" />
-                    --><!-- Buttons to clear the plots --><!--
+                    -->
+        <!-- Buttons to clear the plots -->
+        <!--
                     <Button Command="{Binding ClearPlotCommand}"
                             Content="{Binding ClearAllButtonLabel}"
                             Visibility="{Binding ShowInPlotView, Converter={StaticResource MyBooleanToVisibilityConverter}}"
@@ -48,7 +42,9 @@
                             Visibility="{Binding ShowInPlotView, Converter={StaticResource MyBooleanToVisibilityConverter}}"
                             Width="80" Height="20" Margin="0,5,0,0" />
                 </StackLayout>
-                --><!--  --><!--
+                -->
+        <!--  -->
+        <!--
                 <StackLayout Orientation="Vertical" Margin="5,0,10,0">
                     <StackLayout Orientation="Horizontal" Margin="0">
                         <TextBlock Text="{Binding XAxisSpacingLabel}" VerticalAlignment="Center" />
@@ -86,8 +82,9 @@
                         Margin="0,5,0,0" />
                 </StackLayout>
             </StackLayout>-->
-            <!--<StackLayout Orientation="Horizontal" HorizontalAlignment="Center">
-                --><!--<CheckBox Content="{Binding AutoScaleXLabel}" IsChecked="{Binding AutoScaleX, Mode=TwoWay}" Margin="4"
+        <!--<StackLayout Orientation="Horizontal" HorizontalAlignment="Center">
+                -->
+        <!--<CheckBox Content="{Binding AutoScaleXLabel}" IsChecked="{Binding AutoScaleX, Mode=TwoWay}" Margin="4"
                           VerticalAlignment="Center" />
                 <ContentControl IsEnabled="{Binding ManualScaleX}">
                     <StackLayout Orientation="Horizontal">
@@ -102,9 +99,9 @@
                     </StackLayout>
                 </ContentControl>-->
 
-                <!--<CheckBox Content="{Binding AutoScaleYLabel}" IsChecked="{Binding AutoScaleY, Mode=TwoWay}" Margin="4"
+        <!--<CheckBox Content="{Binding AutoScaleYLabel}" IsChecked="{Binding AutoScaleY, Mode=TwoWay}" Margin="4"
                           VerticalAlignment="Center" />-->
-                <!--<ContentControl IsEnabled="{Binding ManualScaleY}" HorizontalContentAlignment="Right">
+        <!--<ContentControl IsEnabled="{Binding ManualScaleY}" HorizontalContentAlignment="Right">
                     <StackLayout Orientation="Horizontal">
                         <TextBlock Text="{Binding MinYLabel}" Margin="3" VerticalAlignment="Center" />
                         <TextBox
@@ -115,9 +112,10 @@
                             Text="{Binding MaxYValue, Mode=TwoWay, StringFormat={StaticResource ScientificFormat}}"
                             VerticalAlignment="Center" Width="52" Margin="0,4" KeyDown="TextBox_KeyDown" />
                     </StackLayout>
-                </ContentControl>--><!--
+                </ContentControl>-->
+        <!--
             </StackLayout>-->
         <!--</StackLayout>-->
         <!-- Options below the plot -->
-    <!--</Grid>-->
+    </ScrollView>
 </ContentPage>

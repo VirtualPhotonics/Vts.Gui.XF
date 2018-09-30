@@ -13,11 +13,19 @@ namespace Vts.Gui.XF.ViewModel
 {
     public class PanelsListViewModel : BaseViewModel
     {
+        public SpectralMappingViewModel SpectralMappingVM { get; private set; }
+        public PlotViewModel PlotVM { get; private set; }
+        public static PanelsListViewModel Current { get; set; }
+
         public List<PanelsItem> PanelsList { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public PanelsListViewModel()
         {
+            Current = this;
+            SpectralMappingVM = new SpectralMappingViewModel();
+            PlotVM = new PlotViewModel();
+
             PanelsList = new List<PanelsItem>
             {
                 new PanelsItem { Id = Guid.NewGuid().ToString(), Name = "Spectral Panel", Description="Construct absorption and reduced scattering coefficient spectra." },

@@ -15,7 +15,7 @@ namespace Vts.Gui.XF.View
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new SpectralMappingViewModel();
+            BindingContext = viewModel = PanelsListViewModel.Current.SpectralMappingVM;
         }
         private void SetSectionVisibility(StackLayout section, bool isVisible)
         {
@@ -26,7 +26,7 @@ namespace Vts.Gui.XF.View
         }
         async void OnPlotMuaSpectrumButton_Clicked(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new PlotView());                
+            await Navigation.PushAsync(new PlotView());
         }
         //async void OnUpdateWavelengthButton_Clicked(object sender, EventArgs args)
         //{

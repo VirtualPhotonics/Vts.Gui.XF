@@ -163,7 +163,7 @@ namespace Vts.Gui.XF.ViewModel
             //Commands.Plot_SetAxesLabels.Executed += Plot_SetAxesLabels_Executed;
 
             //PlotValues = new RelayCommand<Array>(Plot_Executed);
-            PlotValuesCommand = new Command(async () => await ExecutePlotCommand(null));
+            PlotValuesCommand = new Command<Array>(async (x) => await ExecutePlotCommand(x));
             //SetAxesLabels = new RelayCommand<object>(Plot_SetAxesLabels_Executed);
             //ClearPlotCommand = new RelayCommand(() => Plot_Cleared(null, null));
             //ClearPlotSingleCommand = new RelayCommand(() => Plot_ClearedSingle(null, null));
@@ -806,19 +806,19 @@ namespace Vts.Gui.XF.ViewModel
             MaxYValue = maxY;
         }
 
-        //private void ConstuctPlot(DataPointCollection dataPointCollection)
-        //{
-        //    // function to filter the results if we're not auto-scaling
-        //    Func<DataPoint, bool> isWithinAxes =
-        //        p =>
-        //            (AutoScaleX || (p.X <= MaxXValue && p.X >= MinXValue)) &&
-        //            (AutoScaleY || (p.Y <= MaxYValue && p.Y >= MinYValue));
+        private void ConstuctPlot(DataPointCollection dataPointCollection)
+        {
+            // function to filter the results if we're not auto-scaling
+            Func<DataPoint, bool> isWithinAxes =
+                p =>
+                    (AutoScaleX || (p.X <= MaxXValue && p.X >= MinXValue)) &&
+                    (AutoScaleY || (p.Y <= MaxYValue && p.Y >= MinYValue));
 
-        //    // function to filter out any invalid data points
-        //    Func<DataPoint, bool> isValidDataPoint =
-        //        p =>
-        //            !double.IsInfinity(Math.Abs(p.X)) && !double.IsNaN(p.X) && !double.IsInfinity(Math.Abs(p.Y)) &&
-        //            !double.IsNaN(p.Y);
+            // function to filter out any invalid data points
+            Func<DataPoint, bool> isValidDataPoint =
+                p =>
+                    !double.IsInfinity(Math.Abs(p.X)) && !double.IsNaN(p.X) && !double.IsInfinity(Math.Abs(p.Y)) &&
+                    !double.IsNaN(p.Y);
 
         //    //check if any normalization is selected 
         //    var normToCurve = PlotNormalizationTypeOptionVM.SelectedValue == PlotNormalizationType.RelativeToCurve &&
@@ -826,12 +826,12 @@ namespace Vts.Gui.XF.ViewModel
         //    var normToMax = PlotNormalizationTypeOptionVM.SelectedValue == PlotNormalizationType.RelativeToMax &&
         //                    DataSeriesCollection.Count > 0;
 
-        //    var tempPointArrayA = new List<Point>();
+            var tempPointArrayA = new List<Point>();
         //    var tempPointArrayB = new List<Point>();
 
-        //    double x;
-        //    double y;
-        //    var lineSeriesA = new LineSeries();
+            double x;
+            double y;
+            var lineSeriesA = new LineSeries();
         //    var lineSeriesB = new LineSeries(); //we need B for complex
         //    if (dataPointCollection.DataPoints[0] is ComplexDataPoint)
         //    {
@@ -984,10 +984,10 @@ namespace Vts.Gui.XF.ViewModel
         //            tempY = (from DoubleDataPoint dp in DataSeriesCollection[0].DataPoints select dp.Y).ToArray();
         //        }
 
-        //        var curveIndex = 0;
-        //        foreach (var dp in dataPointCollection.DataPoints.Cast<DoubleDataPoint>())
-        //        {
-        //            x = XAxisSpacingOptionVM.SelectedValue == ScalingType.Log ? Math.Log10(dp.X) : dp.X;
+                var curveIndex = 0;
+                foreach (var dp in dataPointCollection.DataPoints.Cast<DoubleDataPoint>())
+                {
+                    x = dp.X; //XAxisSpacingOptionVM.SelectedValue == ScalingType.Log ? Math.Log10(dp.X) : dp.X;
         //            switch (PlotNormalizationTypeOptionVM.SelectedValue)
         //            {
         //                case PlotNormalizationType.RelativeToCurve:
@@ -998,19 +998,19 @@ namespace Vts.Gui.XF.ViewModel
         //                    y = dp.Y/max;
         //                    break;
         //                default:
-        //                    y = dp.Y;
+                            y = dp.Y;
         //                    break;
         //            }
         //            y = YAxisSpacingOptionVM.SelectedValue == ScalingType.Log ? Math.Log10(y) : y;
-        //            var point = new DataPoint(x, y);
-        //            if (isValidDataPoint(point) && isWithinAxes(point))
-        //            {
-        //                lineSeriesA.Points.Add(point);
-        //                //Add the data to the tempPointArray to add to the PlotSeriesCollection
-        //                tempPointArrayA.Add(new Point(x, y));
-        //            }
-        //            curveIndex += 1;
-        //        }
+                    var point = new DataPoint(x, y);
+                    if (isValidDataPoint(point) && isWithinAxes(point))
+                    {
+                        lineSeriesA.Points.Add(point);
+                        //Add the data to the tempPointArray to add to the PlotSeriesCollection
+                        tempPointArrayA.Add(new Point(x, y));
+                    }
+                    curveIndex += 1;
+                }
         //    }
         //    if (ShowComplexPlotToggle)
         //    {
@@ -1037,16 +1037,16 @@ namespace Vts.Gui.XF.ViewModel
         //    }
         //    else
         //    {
-        //        lineSeriesA.Title = dataPointCollection.Title;
-        //        lineSeriesA.MarkerType = MarkerType.Circle;
-        //        PlotModel.Series.Add(lineSeriesA);
-        //        PlotModel.Title = PlotTitles[PlotTitles.Count - 1];
-        //        PlotSeriesCollection.Add(tempPointArrayA.ToArray());
+                lineSeriesA.Title = dataPointCollection.Title;
+                lineSeriesA.MarkerType = MarkerType.Circle;
+                PlotModel.Series.Add(lineSeriesA);
+                PlotModel.Title = PlotTitles[PlotTitles.Count - 1];
+                PlotSeriesCollection.Add(tempPointArrayA.ToArray());
         //    }
-        //    PlotModel.Axes.Clear();
-        //    PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = XAxis, TitleFontWeight = FontWeights.Bold });
-        //    PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = YAxis, TitleFontWeight = FontWeights.Bold });
-        //}
+            PlotModel.Axes.Clear();
+            PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = XAxis, TitleFontWeight = FontWeights.Bold });
+            PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = YAxis, TitleFontWeight = FontWeights.Bold });
+        }
 
         /// <summary>
         ///     Updates the plot.
@@ -1059,7 +1059,7 @@ namespace Vts.Gui.XF.ViewModel
 
             foreach (var series in DataSeriesCollection)
             {
-                //ConstuctPlot(series);
+                ConstuctPlot(series);
             }
             CalculateMinMax();
             PlotModel.IsLegendVisible = !_HideKey;

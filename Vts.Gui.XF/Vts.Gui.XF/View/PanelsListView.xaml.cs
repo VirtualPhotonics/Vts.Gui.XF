@@ -35,7 +35,7 @@ namespace Vts.Gui.XF.View
             }
 
            // Manually deselect item.
-           //PanelsListView.SelectedItem = null;
+           ItemsListView.SelectedItem = null;
         }
 
         //async void AddItem_Clicked(object sender, EventArgs e)
