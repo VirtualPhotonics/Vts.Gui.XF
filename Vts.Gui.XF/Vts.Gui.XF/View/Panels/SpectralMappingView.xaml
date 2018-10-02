@@ -4,7 +4,7 @@
              x:Class="Vts.Gui.XF.View.SpectralMappingView"
              xmlns:view="clr-namespace:Vts.Gui.XF.View"
              Title="Spectral Panel:">
-
+    <ScrollView>
     <Grid x:Name="LayoutRoot">
         <StackLayout Orientation="Vertical">
             <Grid>
@@ -94,11 +94,11 @@
                 <!--<view:RadioButtonOptionView BindingContext="{Binding ScatteringTypeVM}" />-->
                 <!-- CKH question: can I bypass RadioButtonOptionView - it has many constructs not supported by XF -->
 
-                <Picker Grid.Column="0" Grid.Row="3" 
-                        Title="{Binding ScatteringTypeVM.GroupName}" 
-                        ItemsSource="{Binding ScatteringTypeVM.SelectedDisplayNames}"
-                        SelectedItem="{Binding ScatterType.Scatterer, Mode=TwoWay}" 
-                        SelectedIndex="{Binding ScatteringTypeVM.SelectedDisplayName, Mode=TwoWay}"
+                    <Picker Grid.Column="0" Grid.Row="3" x:Name="scattererPicker"
+                        BindingContext="{Binding ScatteringTypeVM}"
+                        Title="{Binding ConverterParameter=Heading_ScattererType, Converter={StaticResource MyResourceToStringConverter}}" 
+                        ItemsSource="{Binding AllDisplayNames}"
+                        SelectedIndex="{Binding SelectedValue, Mode=TwoWay}"
                         HeightRequest="50"/>
                 <!-- Intralipid Scatterer view -->
                 <StackLayout Grid.Column="0" Grid.Row="4"  Orientation="Horizontal" IsVisible="{Binding DisplayIntralipidScatterer}">
@@ -128,7 +128,7 @@
                     <Label Text="="  />
                     <Entry Text="{Binding Scatterer.MediumRefractiveIndexMismatch, Mode=TwoWay}" />
                 </StackLayout>
-
+    
                 <!-- Single-λ Calculator -->
                 <Label Grid.Column="0" Grid.Row="5"  
                        Text="{Binding ConverterParameter=Label_Calculator, Converter={StaticResource MyResourceToStringConverter}}" />
@@ -184,4 +184,5 @@
             </Grid>
         </StackLayout>
     </Grid>
+    </ScrollView>
 </ContentPage>

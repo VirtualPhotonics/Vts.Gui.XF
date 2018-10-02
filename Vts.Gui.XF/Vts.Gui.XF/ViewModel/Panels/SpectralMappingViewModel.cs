@@ -62,8 +62,12 @@ namespace Vts.Gui.XF.ViewModel
                         var myScatterer = (PowerLawScatterer)SelectedTissue.Scatterer;
                         myScatterer.SetTissueType(SelectedTissue.TissueType);
                     }
-                    ScatteringTypeName = SelectedTissue.Scatterer.GetType().FullName;
+                    //ScatteringTypeName = SelectedTissue.Scatterer.GetType().FullName;
+                    DisplayIntralipidScatterer = ScatteringTypeVM.Options[ScatteringType.Intralipid].IsSelected;
+                    DisplayPowerLawScatterer = ScatteringTypeVM.Options[ScatteringType.PowerLaw].IsSelected;
+                    DisplayMieScatterer = ScatteringTypeVM.Options[ScatteringType.Mie].IsSelected;
                 }
+
                 OnPropertyChanged("Scatterer");
                 UpdateOpticalProperties();
             };
@@ -100,7 +104,7 @@ namespace Vts.Gui.XF.ViewModel
             SelectedTissue = Tissues.First();
             ScatteringTypeVM.SelectedValue = SelectedTissue.ScattererType;
             // forces update to all bindings established in hanlder for ScatteringTypeVM.PropertyChanged above
-            ScatteringTypeName = SelectedTissue.GetType().FullName;
+            //ScatteringTypeName = SelectedTissue.GetType().FullName;
             OpticalProperties = new OpticalProperties(0.01, 1, 0.8, 1.4);
             Wavelength = 650;
 
@@ -116,11 +120,6 @@ namespace Vts.Gui.XF.ViewModel
         public ICommand PlotMuaSpectrumCommand { get; set; }
         //public RelayCommand PlotMuspSpectrumCommand { get; set; }
 
-        public string ScattererTypeLabel
-        {
-            get { return StringLookup.GetLocalizedString("Heading_ScattererType"); }
-        }
-
         public string PlotMusPrimeButtonLabel
         {
             get { return StringLookup.GetLocalizedString("Button_PlotMusPrime"); }
@@ -132,18 +131,21 @@ namespace Vts.Gui.XF.ViewModel
         /// </summary>
         public IScatterer Scatterer
         {
-            get { return _selectedTissue.Scatterer; }
-        }
-
-        public string ScatteringTypeName
-        {
-            get { return _scatteringTypeName; }
-            set
+            get
             {
-                _scatteringTypeName = value;
-                OnPropertyChanged("ScatteringTypeName");
+                return _selectedTissue.Scatterer;
             }
         }
+        // ScatteringTypeName is used by the ScatteringTemplateSelector which is now obsolete
+        //public string ScatteringTypeName
+        //{
+        //    get { return _scatteringTypeName; }
+        //    set
+        //    {
+        //        _scatteringTypeName = value;
+        //        OnPropertyChanged("ScatteringTypeName");
+        //    }
+        //}
 
         public OptionViewModel<ScatteringType> ScatteringTypeVM
         {
@@ -167,7 +169,7 @@ namespace Vts.Gui.XF.ViewModel
                 OnPropertyChanged("Scatterer");
 
                 ScatteringTypeVM.Options[_selectedTissue.Scatterer.ScattererType].IsSelected = true;
-                ScatteringTypeName = _selectedTissue.Scatterer.GetType().FullName;
+                //ScatteringTypeName = _selectedTissue.Scatterer.GetType().FullName;
 
                 UpdateOpticalProperties();
 
@@ -188,9 +190,9 @@ namespace Vts.Gui.XF.ViewModel
                     BloodConcentrationVM.DisplayBloodVM = false;
                 }
                 // set xaml to be shown based on Tissue
-                DisplayIntralipidScatterer = _selectedTissue.Scatterer.ScattererType == ScatteringType.Intralipid;
-                DisplayPowerLawScatterer = _selectedTissue.Scatterer.ScattererType == ScatteringType.PowerLaw;
-                DisplayMieScatterer = _selectedTissue.Scatterer.ScattererType == ScatteringType.Mie;
+                DisplayIntralipidScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Intralipid;
+                DisplayPowerLawScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.PowerLaw;
+                DisplayMieScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Mie;
             }
         }
 
