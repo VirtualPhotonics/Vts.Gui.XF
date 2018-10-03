@@ -4,11 +4,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
              Title="Plots:">
-    <ScrollView>
-        <oxy:PlotView x:Name="MyChart" 
-                      Model="{Binding PlotModel}"
-                      VerticalOptions="Center" HorizontalOptions="Center"/>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="" Clicked="OnSettingsButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+            <oxy:PlotView x:Name="MyChart"
+                          Model="{Binding PlotModel}"
+                          VerticalOptions="FillAndExpand" 
+                          HorizontalOptions="FillAndExpand"/>
         <!-- Chart control for the plot -->
         <!--<oxy:PlotView x:Name="MyChart" Grid.Row="0" Model="{Binding PlotModel}" MinHeight="460" MinWidth="515" />-->
         <!-- Hide legend checkbox -->

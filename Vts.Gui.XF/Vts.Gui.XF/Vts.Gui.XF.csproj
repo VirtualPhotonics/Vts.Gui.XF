@@ -52,5 +52,8 @@
     <EmbeddedResource Update="View\Panels\SubPanels\BloodConcentrationView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\Panels\SubPanels\PlotViewSettings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

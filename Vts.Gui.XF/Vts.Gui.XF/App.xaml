@@ -7,6 +7,17 @@
         <ResourceDictionary>
         <!--Don't need BooleanToVisibilityConverter since IsVisible already boolean-->
             <converters:ResourceToStringConverter x:Key="MyResourceToStringConverter" />
+            <!-- Custom Fonts -->
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesome">
+                <On Platform="Android" Value="fa-regular-400.ttf#Font Awesome 5 Free Regular" />
+                <On Platform="UWP" Value="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                <On Platform="iOS" Value="Font Awesome 5 Free" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeSolid">
+                <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
+                <On Platform="UWP" Value="Assets/fa-solid-900.ttf#Font Awesome 5 Free Solid" />
+                <On Platform="iOS" Value="Font Awesome 5 Free Solid" />
+            </OnPlatform>
         </ResourceDictionary>
 
     </Application.Resources>
