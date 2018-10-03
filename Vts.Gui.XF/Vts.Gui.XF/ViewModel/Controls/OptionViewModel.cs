@@ -24,7 +24,8 @@ namespace Vts.Gui.XF.ViewModel
         private bool _ShowTitle;
         private string[] _unSelectedDisplayNames;
         private TValue[] _unSelectedValues;
-
+        // CKH: added following to allow dynamic xaml
+        private string[] _allDisplayNames;
 
         public OptionViewModel(string groupName, bool showTitle, TValue initialValue, TValue[] allValues,
             bool enableMultiSelect = false)
@@ -162,6 +163,15 @@ namespace Vts.Gui.XF.ViewModel
                 OnPropertyChanged("UnSelectedDisplayNames");
             }
         }
+        // CKH: AllDisplayNames added to support used of picker since no dynamic xaml available in XF
+        public string[] AllDisplayNames
+        {
+            get { return _allDisplayNames; }
+            set
+            {
+                _allDisplayNames = value;
+            }
+        }
 
         public Dictionary<TValue, OptionModel<TValue>> Options
         {
@@ -212,6 +222,7 @@ namespace Vts.Gui.XF.ViewModel
             _selectedDisplayNames = selectedOptions.Select(item => item.Value.DisplayName).ToArray();
             _unSelectedValues = unSelectedOptions.Select(item => item.Value.Value).ToArray();
             _unSelectedDisplayNames = unSelectedOptions.Select(item => item.Value.DisplayName).ToArray();
+            _allDisplayNames = _selectedDisplayNames.Concat(_unSelectedDisplayNames).ToArray();
             OnPropertyChanged("SelectedValues");
             OnPropertyChanged("SelectedDisplayNames");
             OnPropertyChanged("UnSelectedValues");

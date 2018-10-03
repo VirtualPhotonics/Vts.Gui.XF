@@ -16,6 +16,7 @@ namespace Vts.Gui.XF.View
             InitializeComponent();
 
             BindingContext = viewModel = PanelsListViewModel.Current.SpectralMappingVM;
+
         }
         private void SetSectionVisibility(StackLayout section, bool isVisible)
         {
