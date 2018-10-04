@@ -1,8 +1,6 @@
-﻿using System.Windows;
-//using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System;
+using Vts.Gui.XF.View.Panels.SubPanels;
 using Vts.Gui.XF.ViewModel;
-//using Vts.Gui.XF.ViewModel.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,16 +13,12 @@ namespace Vts.Gui.XF.View
         public PlotView()
         {
             InitializeComponent();
-
-            BindingContext = viewModel = PanelsListViewModel.Current.PlotVM; //new PlotViewModel();
+            BindingContext = viewModel = PanelsListViewModel.Current.PlotVM;
         }
 
-
-        //private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    var tbx = sender as TextBox;
-        //    if (tbx != null && e.Key == Key.Enter)
-        //        tbx.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-        //}
+        async void OnSettingsButton_Clicked(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new PlotViewSettings());
+        }
     }
 }

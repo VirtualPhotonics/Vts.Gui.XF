@@ -1645,11 +1645,29 @@ namespace Vts.Gui.XF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to X Axis Log 10.
+        /// </summary>
+        public static string Label_XAxisLog10 {
+            get {
+                return ResourceManager.GetString("Label_XAxisLog10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to X Axis Spacing:.
         /// </summary>
         public static string Label_XAxisSpacing {
             get {
                 return ResourceManager.GetString("Label_XAxisSpacing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Y Axis Log 10.
+        /// </summary>
+        public static string Label_YAxisLog10 {
+            get {
+                return ResourceManager.GetString("Label_YAxisLog10", resourceCulture);
             }
         }
         

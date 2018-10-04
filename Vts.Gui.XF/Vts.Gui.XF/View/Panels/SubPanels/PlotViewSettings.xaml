@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             x:Class="Vts.Gui.XF.View.Panels.SubPanels.PlotViewSettings"
+             Title="Settings">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="50,50,50,50">
+                <Label Text="&#xf085;" HeightRequest="100" BackgroundColor="White" TextColor="Black" FontSize="36" FontFamily="{StaticResource FontAwesomeSolid}" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding ConverterParameter=Label_HoldOn, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Switch IsToggled="{Binding HoldOn}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding ConverterParameter=Label_XAxisLog10, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Switch IsToggled="{Binding XAxisLog10}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding ConverterParameter=Label_YAxisLog10, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Switch IsToggled="{Binding YAxisLog10}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding ConverterParameter=Label_AutoScaleX, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Switch IsToggled="{Binding AutoScaleX}"/>
+                </StackLayout>
+                <forms:RangeSlider x:Name="RangeSliderX" IsEnabled="{Binding ManualScaleX}"
+                                   MinimumValue="{Binding MinXValue, Mode=TwoWay}" 
+                                   MaximumValue="{Binding MaxXValue, Mode=TwoWay}" 
+                                   LowerValue="{Binding MinX}" 
+                                   UpperValue="{Binding MaxX}" 
+                                   StepValue="{Binding StepX}" 
+                                   StepValueContinuously="False" 
+                                   VerticalOptions="Center" 
+                                   TextSize="15" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding ConverterParameter=Label_AutoScaleY, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Switch IsToggled="{Binding AutoScaleY}"/>
+                </StackLayout>
+                <forms:RangeSlider x:Name="RangeSliderY" IsEnabled="{Binding ManualScaleY}"
+                                   MinimumValue="{Binding MinYValue, Mode=TwoWay}" 
+                                   MaximumValue="{Binding MaxYValue, Mode=TwoWay}" 
+                                   LowerValue="{Binding MinY}" 
+                                   UpperValue="{Binding MaxY}" 
+                                   StepValue="{Binding StepY}" 
+                                   StepValueContinuously="False" 
+                                   VerticalOptions="Center" 
+                                   TextSize="15" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

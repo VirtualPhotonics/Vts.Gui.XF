@@ -3,14 +3,17 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
-             Title="Plots:">
-    <ScrollView>
-        <oxy:PlotView x:Name="MyChart" 
-                      Model="{Binding PlotModel}"
-                      VerticalOptions="Center" HorizontalOptions="Center"/>
+             Title="Plots">
 
-        <!-- Chart control for the plot -->
-        <!--<oxy:PlotView x:Name="MyChart" Grid.Row="0" Model="{Binding PlotModel}" MinHeight="460" MinWidth="515" />-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="Assets/cogs.png" Clicked="OnSettingsButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+            <oxy:PlotView x:Name="MyChart"
+                          Model="{Binding PlotModel}"
+                          VerticalOptions="FillAndExpand" 
+                          HorizontalOptions="FillAndExpand"/>
         <!-- Hide legend checkbox -->
         <!--<CheckBox Grid.Row="1"
                   HorizontalAlignment="Right"

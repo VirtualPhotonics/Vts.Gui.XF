@@ -76,11 +76,14 @@ namespace Vts.Gui.XF.ViewModel
         private bool _HoldOn;
         private bool _IsComplexPlot;
         private IList<string> _Labels;
-        private double _MaxXValue;
-        private double _MaxYValue;
-        private double _MinXValue;
-        private double _MinYValue;
+        private double _maxXValue;
+        private double _maxYValue;
+        private double _minXValue;
+        private double _minYValue;
         private ViewResolvingPlotModel _plotModel;
+
+        private bool _xAxisLog10;
+        private bool _yAxisLog10;
         //private OptionViewModel<PlotNormalizationType> _PlotNormalizationTypeOptionVM;
         private PlotPointCollection _PlotSeriesCollection;
         private IList<string> _PlotTitles;
@@ -99,10 +102,10 @@ namespace Vts.Gui.XF.ViewModel
         public PlotViewModel(int plotViewId = 0)
         {
             _plotViewId = plotViewId;
-            _MinYValue = 1E-9;
-            _MaxYValue = 1.0;
-            _MinXValue = 1E-9;
-            _MaxXValue = 1.0;
+            _minYValue = MinY = 1E-9;
+            _maxYValue = MaxY = 1.0;
+            _minXValue = MinX = 1E-9;
+            _maxXValue = MaxX = 1.0;
             _AutoScaleX = true;
             _AutoScaleY = true;
 
@@ -143,6 +146,8 @@ namespace Vts.Gui.XF.ViewModel
             _ShowInPlotView = true;
             _ShowAxes = false;
             _showComplexPlotToggle = false;
+            _xAxisLog10 = false;
+            _yAxisLog10 = false;
 
             //XAxisSpacingOptionVM = new OptionViewModel<ScalingType>("XAxisSpacing_" + _plotViewId, false);
             //XAxisSpacingOptionVM.PropertyChanged += (sender, args) => UpdatePlotSeries();
@@ -179,91 +184,6 @@ namespace Vts.Gui.XF.ViewModel
         //public RelayCommand ExportDataToTextCommand { get; set; }
         //public RelayCommand DuplicateWindowCommand { get; set; }
 
-        public string HideKeyLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_HideKey"); }
-        }
-
-        public string HoldOnLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_HoldOn"); }
-        }
-
-        public string ClearAllButtonLabel
-        {
-            get { return StringLookup.GetLocalizedString("Button_ClearAll"); }
-        }
-
-        public string ClearNewestButtonLabel
-        {
-            get { return StringLookup.GetLocalizedString("Button_ClearNewest"); }
-        }
-
-        public string XAxisSpacingLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_XAxisSpacing"); }
-        }
-
-        public string YAxisSpacingLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_YAxisSpacing"); }
-        }
-
-        public string PlotToggleLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_PlotToggle"); }
-        }
-
-        public string NormalizationLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_Normalization"); }
-        }
-
-        public string PlotLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_PlotLabel"); }
-        }
-
-        public string ExportImageButtonLabel
-        {
-            get { return StringLookup.GetLocalizedString("Button_ExportImage"); }
-        }
-
-        public string ExportDataButtonLabel
-        {
-            get { return StringLookup.GetLocalizedString("Button_ExportData"); }
-        }
-
-        public string AutoScaleXLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_AutoScaleX"); }
-        }
-
-        public string MinXLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_MinX"); }
-        }
-
-        public string MaxXLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_MaxX"); }
-        }
-
-        public string AutoScaleYLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_AutoScaleY"); }
-        }
-
-        public string MinYLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_MinY"); }
-        }
-
-        public string MaxYLabel
-        {
-            get { return StringLookup.GetLocalizedString("Label_MaxY"); }
-        }
-
         private string XAxis { get; set; }
         private string YAxis { get; set; }
 
@@ -273,6 +193,13 @@ namespace Vts.Gui.XF.ViewModel
         private IList<string> ImagLabels { get; set; }
         private IList<string> PhaseLabels { get; set; }
         private IList<string> AmplitudeLabels { get; set; }
+
+        public double MaxX { get; set; }
+        public double MaxY { get; set; }
+        public double MinX { get; set; }
+        public double MinY { get; set; }
+        public double StepX { get; set; }
+        public double StepY { get; set; }
 
         public ViewResolvingPlotModel PlotModel
         {
@@ -365,25 +292,25 @@ namespace Vts.Gui.XF.ViewModel
             }
         }
 
-        //public OptionViewModel<ScalingType> XAxisSpacingOptionVM
-        //{
-        //    get { return _XAxisSpacingOptionVM; }
-        //    set
-        //    {
-        //        _XAxisSpacingOptionVM = value;
-        //        OnPropertyChanged("XAxisSpacingOptionVM");
-        //    }
-        //}
+        public bool XAxisLog10
+        {
+            get { return _xAxisLog10; }
+            set
+            {
+                _xAxisLog10 = value;
+                OnPropertyChanged("XAxisLog10");
+            }
+        }
 
-        //public OptionViewModel<ScalingType> YAxisSpacingOptionVM
-        //{
-        //    get { return _YAxisSpacingOptionVM; }
-        //    set
-        //    {
-        //        _YAxisSpacingOptionVM = value;
-        //        OnPropertyChanged("YAxisSpacingOptionVM");
-        //    }
-        //}
+        public bool YAxisLog10
+        {
+            get { return _yAxisLog10; }
+            set
+            {
+                _yAxisLog10 = value;
+                OnPropertyChanged("XAxisLog10");
+            }
+        }
 
         //public OptionViewModel<PlotToggleType> PlotToggleTypeOptionVM
         //{
@@ -498,40 +425,40 @@ namespace Vts.Gui.XF.ViewModel
 
         public double MinXValue
         {
-            get { return _MinXValue; }
+            get { return _minXValue; }
             set
             {
-                _MinXValue = value;
+                _minXValue = value;
                 OnPropertyChanged("MinXValue");
             }
         }
 
         public double MaxXValue
         {
-            get { return _MaxXValue; }
+            get { return _maxXValue; }
             set
             {
-                _MaxXValue = value;
+                _maxXValue = value;
                 OnPropertyChanged("MaxXValue");
             }
         }
 
         public double MinYValue
         {
-            get { return _MinYValue; }
+            get { return _minYValue; }
             set
             {
-                _MinYValue = value;
+                _minYValue = value;
                 OnPropertyChanged("MinYValue");
             }
         }
 
         public double MaxYValue
         {
-            get { return _MaxYValue; }
+            get { return _maxYValue; }
             set
             {
-                _MaxYValue = value;
+                _maxYValue = value;
                 OnPropertyChanged("MaxYValue");
             }
         }
@@ -566,10 +493,10 @@ namespace Vts.Gui.XF.ViewModel
             output.ShowInPlotView = false;
             output._HideKey = plotToClone.HideKey;
             output._ShowAxes = plotToClone._ShowAxes;
-            output._MinYValue = plotToClone._MinYValue;
-            output._MaxYValue = plotToClone._MaxYValue;
-            output._MinXValue = plotToClone._MinXValue;
-            output._MaxXValue = plotToClone._MaxXValue;
+            output._minYValue = plotToClone._minYValue;
+            output._maxYValue = plotToClone._maxYValue;
+            output._minXValue = plotToClone._minXValue;
+            output._maxXValue = plotToClone._maxXValue;
             output._AutoScaleX = plotToClone._AutoScaleX;
             output._AutoScaleY = plotToClone._AutoScaleY;
             output._IsComplexPlot = plotToClone._IsComplexPlot;
@@ -769,41 +696,43 @@ namespace Vts.Gui.XF.ViewModel
         {
             // get min and max values for reference
             if (!AutoScaleX && !AutoScaleY) return;
-            var minX = double.PositiveInfinity;
-            var maxX = double.NegativeInfinity;
-            var minY = double.PositiveInfinity;
-            var maxY = double.NegativeInfinity;
+            MinX = double.PositiveInfinity;
+            MaxX = double.NegativeInfinity;
+            MinY = double.PositiveInfinity;
+            MaxY = double.NegativeInfinity;
             foreach (var point in PlotModel.Series.Cast<LineSeries>().SelectMany(series => series.Points))
             {
                 if (AutoScaleX)
                 {
-                    if (point.X > maxX)
+                    if (point.X > MaxX)
                     {
-                        maxX = point.X;
+                        MaxX = point.X;
                     }
-                    if (point.X < minX)
+                    if (point.X < MinX)
                     {
-                        minX = point.X;
+                        MinX = point.X;
                     }
                 }
                 if (!AutoScaleY) continue;
-                if (point.Y > maxY)
+                if (point.Y > MaxY)
                 {
-                    maxY = point.Y;
+                    MaxY = point.Y;
                 }
-                if (point.Y < minY)
+                if (point.Y < MinY)
                 {
-                    minY = point.Y;
+                    MinY = point.Y;
                 }
             }
             if (AutoScaleX)
             {
-                MinXValue = minX;
-                MaxXValue = maxX;
+                MinXValue = MinX;
+                MaxXValue = MaxX;
+                StepX = (MaxX - MinX) / 10;
             }
             if (!AutoScaleY) return;
-            MinYValue = minY;
-            MaxYValue = maxY;
+            MinYValue = MinY;
+            MaxYValue = MaxY;
+            StepY = (MaxY - MinY) / 10;
         }
 
         private void ConstuctPlot(DataPointCollection dataPointCollection)

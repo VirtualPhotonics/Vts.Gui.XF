@@ -786,4 +786,10 @@
   <data name="Exception_String" xml:space="preserve">
     <value>Value must be a string</value>
   </data>
+  <data name="Label_XAxisLog10" xml:space="preserve">
+    <value>X Axis Log 10</value>
+  </data>
+  <data name="Label_YAxisLog10" xml:space="preserve">
+    <value>Y Axis Log 10</value>
+  </data>
 </root>
