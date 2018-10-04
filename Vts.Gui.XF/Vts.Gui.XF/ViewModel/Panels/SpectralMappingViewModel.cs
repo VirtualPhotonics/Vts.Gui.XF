@@ -47,7 +47,7 @@ namespace Vts.Gui.XF.ViewModel
 #endif
             ScatteringTypeVM.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == "SelectedValue" && SelectedTissue != null)
+                if (args.PropertyName == "SelectedValue" && SelectedTissue != null) // this runs based on Tissue changes
                 //SelectedTissue.ScattererType != ScatteringTypeVM.SelectedValue)
                 {
                     SelectedTissue.Scatterer = SolverFactory.GetScattererType(ScatteringTypeVM.SelectedValue);
@@ -63,9 +63,21 @@ namespace Vts.Gui.XF.ViewModel
                         myScatterer.SetTissueType(SelectedTissue.TissueType);
                     }
                     //ScatteringTypeName = SelectedTissue.Scatterer.GetType().FullName;
-                    DisplayIntralipidScatterer = ScatteringTypeVM.Options[ScatteringType.Intralipid].IsSelected;
-                    DisplayPowerLawScatterer = ScatteringTypeVM.Options[ScatteringType.PowerLaw].IsSelected;
-                    DisplayMieScatterer = ScatteringTypeVM.Options[ScatteringType.Mie].IsSelected;
+                    DisplayIntralipidScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Intralipid;
+                    DisplayPowerLawScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.PowerLaw;
+                    DisplayMieScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Mie;
+                }
+                if (args.PropertyName == "SelectedDisplayName") // this runs based on Picker changes
+                {
+                    if (ScatteringTypeVM.SelectedDisplayName.Contains("Power"))
+                        ScatteringTypeVM.SelectedValue = ScatteringType.PowerLaw;
+                    if (ScatteringTypeVM.SelectedDisplayName.Contains("Intralipid"))
+                        ScatteringTypeVM.SelectedValue = ScatteringType.Intralipid;
+                    if (ScatteringTypeVM.SelectedDisplayName.Contains("Mie"))
+                        ScatteringTypeVM.SelectedValue = ScatteringType.Mie;
+                    DisplayIntralipidScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Intralipid;
+                    DisplayPowerLawScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.PowerLaw;
+                    DisplayMieScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Mie;
                 }
 
                 OnPropertyChanged("Scatterer");

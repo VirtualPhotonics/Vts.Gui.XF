@@ -26,6 +26,7 @@ namespace Vts.Gui.XF.ViewModel
         private TValue[] _unSelectedValues;
         // CKH: added following to allow dynamic xaml
         private string[] _allDisplayNames;
+        private TValue[] _allValues;
 
         public OptionViewModel(string groupName, bool showTitle, TValue initialValue, TValue[] allValues,
             bool enableMultiSelect = false)
@@ -172,6 +173,14 @@ namespace Vts.Gui.XF.ViewModel
                 _allDisplayNames = value;
             }
         }
+        public TValue[] AllValues
+        {
+            get { return _allValues; }
+            set
+            {
+                _allValues = value;
+            }
+        }
 
         public Dictionary<TValue, OptionModel<TValue>> Options
         {
@@ -223,6 +232,7 @@ namespace Vts.Gui.XF.ViewModel
             _unSelectedValues = unSelectedOptions.Select(item => item.Value.Value).ToArray();
             _unSelectedDisplayNames = unSelectedOptions.Select(item => item.Value.DisplayName).ToArray();
             _allDisplayNames = _selectedDisplayNames.Concat(_unSelectedDisplayNames).ToArray();
+            _allValues = _selectedValues.Concat(_unSelectedValues).ToArray();
             OnPropertyChanged("SelectedValues");
             OnPropertyChanged("SelectedDisplayNames");
             OnPropertyChanged("UnSelectedValues");

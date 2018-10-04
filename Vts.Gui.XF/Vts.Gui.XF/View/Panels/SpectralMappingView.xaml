@@ -9,7 +9,7 @@
         <StackLayout Orientation="Vertical">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="400" />
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -98,7 +98,7 @@
                         BindingContext="{Binding ScatteringTypeVM}"
                         Title="{Binding ConverterParameter=Heading_ScattererType, Converter={StaticResource MyResourceToStringConverter}}" 
                         ItemsSource="{Binding AllDisplayNames}"
-                        SelectedIndex="{Binding SelectedValue, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"
                         HeightRequest="50"/>
                 <!-- Intralipid Scatterer view -->
                 <StackLayout Grid.Column="0" Grid.Row="4"  Orientation="Horizontal" IsVisible="{Binding DisplayIntralipidScatterer}">
@@ -118,16 +118,22 @@
                 </StackLayout>
                 <!-- Mie Scatterer view -->
                 <StackLayout Grid.Column="0" Grid.Row="4" Orientation="Horizontal" IsVisible="{Binding DisplayMieScatterer}">
-                    <Label Text="{Binding ConverterParameter=Value_ParticleRadius, Converter={StaticResource MyResourceToStringConverter}}"  />
+                    <Label Text="{Binding ConverterParameter=Value_ParticleRadius, Converter={StaticResource MyResourceToStringConverter}}" />
                     <Label Text="="/>
-                    <Entry Text="{Binding Scatterer.ParticleRadius, Mode=TwoWay}"/>
-                    <Label Text="{Binding ConverterParameter=Value_ParticleN, Converter={StaticResource MyResourceToStringConverter}}"  />
+                    <Entry Text="{Binding Scatterer.ParticleRadius, Mode=TwoWay}"
+                           WidthRequest="70"/>
+                    <Label Text="{Binding ConverterParameter=Value_ParticleN, Converter={StaticResource MyResourceToStringConverter}}" />
                     <Label Text="=" />
-                    <Entry Text="{Binding Scatterer.ParticleRefractiveIndexMismatch, Mode=TwoWay}" />
-                    <Label Text="{Binding ConverterParameter=Value_MediumN, Converter={StaticResource MyResourceToStringConverter}}"  />
+                    <Entry Text="{Binding Scatterer.ParticleRefractiveIndexMismatch, Mode=TwoWay}"
+                           WidthRequest="70"/>
+                    <Label Text="{Binding ConverterParameter=Value_MediumN, Converter={StaticResource MyResourceToStringConverter}}"/>
                     <Label Text="="  />
-                    <Entry Text="{Binding Scatterer.MediumRefractiveIndexMismatch, Mode=TwoWay}" />
-                </StackLayout>
+                    <Entry Text="{Binding Scatterer.MediumRefractiveIndexMismatch, Mode=TwoWay}" 
+                           WidthRequest="70"/>
+                    <Label Text="{Binding ConverterParameter=Value_VolumeFraction, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Label Text="="  />
+                    <Entry Text="{Binding Scatterer.VolumeFraction, Mode=TwoWay}" />
+                    </StackLayout>
     
                 <!-- Single-λ Calculator -->
                 <Label Grid.Column="0" Grid.Row="5"  
