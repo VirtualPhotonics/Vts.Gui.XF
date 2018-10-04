@@ -169,6 +169,7 @@ namespace Vts.Gui.XF.ViewModel
                 OnPropertyChanged("Scatterer");
 
                 ScatteringTypeVM.Options[_selectedTissue.Scatterer.ScattererType].IsSelected = true;
+                ScatteringTypeVM.SelectedValue = _selectedTissue.Scatterer.ScattererType;
                 //ScatteringTypeName = _selectedTissue.Scatterer.GetType().FullName;
 
                 UpdateOpticalProperties();
