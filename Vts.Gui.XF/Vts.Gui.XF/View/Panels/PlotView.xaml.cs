@@ -18,7 +18,7 @@ namespace Vts.Gui.XF.View
 
         async void OnSettingsButton_Clicked(object sender, EventArgs args)
         {
-            await Navigation.PushModalAsync(new PlotViewSettings());
+            await Navigation.PushAsync(new PlotViewSettings());
         }
     }
 }
