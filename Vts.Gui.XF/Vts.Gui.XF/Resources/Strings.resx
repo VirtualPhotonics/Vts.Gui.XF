@@ -307,7 +307,7 @@
     <value>Φ(ρ,z,t)</value>
   </data>
   <data name="Label_HoldOn" xml:space="preserve">
-    <value>Hold On</value>
+    <value>Hold On:</value>
   </data>
   <data name="Label_HideKey" xml:space="preserve">
     <value>Hide Key</value>
@@ -328,7 +328,7 @@
     <value>Y Axis Spacing:</value>
   </data>
   <data name="Label_AutoScale" xml:space="preserve">
-    <value>Auto Scale</value>
+    <value>Auto Scale is </value>
   </data>
   <data name="Label_Max" xml:space="preserve">
     <value>Max:</value>
@@ -354,11 +354,11 @@
   <data name="Label_ZMax" xml:space="preserve">
     <value>z_max</value>
   </data>
-  <data name="Label_AutoScaleX" xml:space="preserve">
-    <value>Auto-X</value>
+  <data name="Label_ManualScaleX" xml:space="preserve">
+    <value>Enable manual scaling in X: </value>
   </data>
-  <data name="Label_AutoScaleY" xml:space="preserve">
-    <value>Auto-Y</value>
+  <data name="Label_ManualScaleY" xml:space="preserve">
+    <value>Enable manual scaling in Y: </value>
   </data>
   <data name="Label_MaxX" xml:space="preserve">
     <value>Max X:</value>
@@ -787,9 +787,15 @@
     <value>Value must be a string</value>
   </data>
   <data name="Label_XAxisLog10" xml:space="preserve">
-    <value>X Axis Log 10</value>
+    <value>X Axis Log 10:</value>
   </data>
   <data name="Label_YAxisLog10" xml:space="preserve">
-    <value>Y Axis Log 10</value>
+    <value>Y Axis Log 10: </value>
+  </data>
+  <data name="Label_XAxisRange" xml:space="preserve">
+    <value>X Axis Range:</value>
+  </data>
+  <data name="Label_YAxisRange" xml:space="preserve">
+    <value>Y Axis Range:</value>
   </data>
 </root>
