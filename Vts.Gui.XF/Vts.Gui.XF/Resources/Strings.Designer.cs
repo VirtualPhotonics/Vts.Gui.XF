@@ -583,29 +583,11 @@ namespace Vts.Gui.XF.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auto Scale.
+        ///   Looks up a localized string similar to Auto Scale is .
         /// </summary>
         public static string Label_AutoScale {
             get {
                 return ResourceManager.GetString("Label_AutoScale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Auto-X.
-        /// </summary>
-        public static string Label_AutoScaleX {
-            get {
-                return ResourceManager.GetString("Label_AutoScaleX", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Auto-Y.
-        /// </summary>
-        public static string Label_AutoScaleY {
-            get {
-                return ResourceManager.GetString("Label_AutoScaleY", resourceCulture);
             }
         }
         
@@ -844,7 +826,7 @@ namespace Vts.Gui.XF.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hold On.
+        ///   Looks up a localized string similar to Hold On:.
         /// </summary>
         public static string Label_HoldOn {
             get {
@@ -930,6 +912,24 @@ namespace Vts.Gui.XF.Resources {
         public static string Label_LayerHeight {
             get {
                 return ResourceManager.GetString("Label_LayerHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable manual scaling in X: .
+        /// </summary>
+        public static string Label_ManualScaleX {
+            get {
+                return ResourceManager.GetString("Label_ManualScaleX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable manual scaling in Y: .
+        /// </summary>
+        public static string Label_ManualScaleY {
+            get {
+                return ResourceManager.GetString("Label_ManualScaleY", resourceCulture);
             }
         }
         
@@ -1645,11 +1645,20 @@ namespace Vts.Gui.XF.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to X Axis Log 10.
+        ///   Looks up a localized string similar to X Axis Log 10:.
         /// </summary>
         public static string Label_XAxisLog10 {
             get {
                 return ResourceManager.GetString("Label_XAxisLog10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X Axis Range:.
+        /// </summary>
+        public static string Label_XAxisRange {
+            get {
+                return ResourceManager.GetString("Label_XAxisRange", resourceCulture);
             }
         }
         
@@ -1663,11 +1672,20 @@ namespace Vts.Gui.XF.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Y Axis Log 10.
+        ///   Looks up a localized string similar to Y Axis Log 10: .
         /// </summary>
         public static string Label_YAxisLog10 {
             get {
                 return ResourceManager.GetString("Label_YAxisLog10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Y Axis Range:.
+        /// </summary>
+        public static string Label_YAxisRange {
+            get {
+                return ResourceManager.GetString("Label_YAxisRange", resourceCulture);
             }
         }
         
