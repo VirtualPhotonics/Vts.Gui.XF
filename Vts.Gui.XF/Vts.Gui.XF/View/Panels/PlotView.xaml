@@ -7,6 +7,8 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="Assets/cogs.png" Clicked="OnSettingsButton_Clicked"/>
+        <ToolbarItem Text="Clear Newest" Command="{Binding ClearPlotSingleCommand}"/>
+        <ToolbarItem Text="Clear All" Command="{Binding ClearPlotCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>

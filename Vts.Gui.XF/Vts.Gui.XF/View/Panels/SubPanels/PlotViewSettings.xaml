@@ -10,15 +10,15 @@
                 <Label Text="&#xf085;" HeightRequest="100" BackgroundColor="White" TextColor="Black" FontSize="36" FontFamily="{StaticResource FontAwesomeSolid}" />
                 <StackLayout Orientation="Horizontal" VerticalOptions="Center">
                     <Label Text="{Binding ConverterParameter=Label_HoldOn, Converter={StaticResource MyResourceToStringConverter}}" VerticalOptions="CenterAndExpand" />
-                    <Switch IsToggled="{Binding HoldOn}"/>
+                    <Switch IsToggled="{Binding HoldOn, Mode=TwoWay}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{Binding ConverterParameter=Label_XAxisLog10, Converter={StaticResource MyResourceToStringConverter}}" VerticalOptions="CenterAndExpand" />
-                    <Switch IsToggled="{Binding XAxisLog10}"/>
+                    <Switch IsToggled="{Binding XAxisLog10, Mode=TwoWay}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{Binding ConverterParameter=Label_YAxisLog10, Converter={StaticResource MyResourceToStringConverter}}" VerticalOptions="CenterAndExpand" />
-                    <Switch IsToggled="{Binding YAxisLog10}"/>
+                    <Switch IsToggled="{Binding YAxisLog10, Mode=TwoWay}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{Binding ConverterParameter=Label_ManualScaleX, Converter={StaticResource MyResourceToStringConverter}}" VerticalOptions="CenterAndExpand" />
@@ -56,6 +56,21 @@
                                        ShowTextAboveThumbs="True"
                                        TextFormat="#0.####" />
                 </StackLayout>
+                
+                <Picker x:Name="NormalizationPicker"
+                        BindingContext="{Binding PlotNormalizationTypeOptionVM}"
+                        Title="{Binding ConverterParameter=Label_Normalization, Converter={StaticResource MyResourceToStringConverter}}" 
+                        ItemsSource="{Binding AllDisplayNames}"
+                        SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"
+                        HeightRequest="60"/>
+
+                <Picker x:Name="ToggleTypePicker"
+                        IsVisible="{Binding ShowComplexPlotToggle, Mode=TwoWay}"
+                        BindingContext="{Binding PlotToggleTypeOptionVM}"
+                        Title="{Binding ConverterParameter=Label_PlotToggle, Converter={StaticResource MyResourceToStringConverter}}" 
+                        ItemsSource="{Binding AllDisplayNames}"
+                        SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"
+                        HeightRequest="60"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
