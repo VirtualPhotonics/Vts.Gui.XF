@@ -48,9 +48,8 @@ namespace Vts.Gui.XF.ViewModel
             ScatteringTypeVM.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == "SelectedValue" && SelectedTissue != null) // this runs based on Tissue changes
-                //SelectedTissue.ScattererType != ScatteringTypeVM.SelectedValue)
                 {
-                    SelectedTissue.Scatterer = SolverFactory.GetScattererType(ScatteringTypeVM.SelectedValue);
+                    //SelectedTissue.Scatterer = SolverFactory.GetScattererType(ScatteringTypeVM.SelectedValue);
                     var bindableScatterer = SelectedTissue.Scatterer as INotifyPropertyChanged;
                     if (bindableScatterer != null)
                     {
@@ -124,18 +123,13 @@ namespace Vts.Gui.XF.ViewModel
             //UpdateWavelengthCommand = new Command(OnUpdateWavelengthCommand);
             //PlotMuaSpectrumCommand = new RelayCommand(PlotMuaSpectrum_Executed);
             PlotMuaSpectrumCommand = new Command(async () => await OnPlotMuaSpectrumCommand());
-            //PlotMuspSpectrumCommand = new RelayCommand(PlotMuspSpectrum_Executed);
+            PlotMuspSpectrumCommand = new Command(async () => await OnPlotMuspSpectrumCommand());
         }
 
         //public RelayCommand<object> ResetConcentrations { get; set; }
         public ICommand UpdateWavelengthCommand { get; set; }
         public ICommand PlotMuaSpectrumCommand { get; set; }
-        //public RelayCommand PlotMuspSpectrumCommand { get; set; }
-
-        public string PlotMusPrimeButtonLabel
-        {
-            get { return StringLookup.GetLocalizedString("Button_PlotMusPrime"); }
-        }
+        public ICommand PlotMuspSpectrumCommand { get; set; }
 
         /// <summary>
         ///     Simple pass-through for SelectedTissue.Scatterer
@@ -182,6 +176,15 @@ namespace Vts.Gui.XF.ViewModel
 
                 ScatteringTypeVM.Options[_selectedTissue.Scatterer.ScattererType].IsSelected = true;
                 ScatteringTypeVM.SelectedValue = _selectedTissue.Scatterer.ScattererType;
+
+                // make sure Scatterer Picker Display name gets updated appropriately when Tissue changes Picker
+                if (ScatteringTypeVM.SelectedValue == ScatteringType.PowerLaw)
+                    ScatteringTypeVM.SelectedDisplayName = ScatteringTypeVM.Options[ScatteringType.PowerLaw].DisplayName;
+                if (ScatteringTypeVM.SelectedValue == ScatteringType.Intralipid)
+                    ScatteringTypeVM.SelectedDisplayName = ScatteringTypeVM.Options[ScatteringType.Intralipid].DisplayName;
+                if (ScatteringTypeVM.SelectedValue == ScatteringType.Mie)
+                    ScatteringTypeVM.SelectedDisplayName = ScatteringTypeVM.Options[ScatteringType.Mie].DisplayName;
+
                 //ScatteringTypeName = _selectedTissue.Scatterer.GetType().FullName;
 
                 UpdateOpticalProperties();
@@ -374,38 +377,39 @@ namespace Vts.Gui.XF.ViewModel
             //    StringLookup.GetLocalizedString("Message_PlotMuASpectrum") + "[" + minWavelength + ", " + maxWavelength + "]\r");
         }
 
-        //private void PlotMuspSpectrum_Executed()
-        //{
-        //    var axisType = IndependentVariableAxis.Wavelength;
-        //    var axisUnits = IndependentVariableAxisUnits.NM;
-        //    var axesLabels = new PlotAxesLabels(
-        //        StringLookup.GetLocalizedString("Label_MuSPrime"),
-        //        StringLookup.GetLocalizedString("Measurement_Inv_mm"),
-        //        new IndependentAxisViewModel
-        //        {
-        //            AxisType = axisType,
-        //            AxisLabel = axisType.GetInternationalizedString(),
-        //            AxisUnits = axisUnits.GetInternationalizedString(),
-        //            AxisRangeVM = WavelengthRangeVM
-        //        });
-        //    WindowViewModel.Current.PlotVM.SetAxesLabels.Execute(axesLabels);
+        async Task OnPlotMuspSpectrumCommand()
+        {
+            var axisType = IndependentVariableAxis.Wavelength;
+            var axisUnits = IndependentVariableAxisUnits.NM;
+            //var axesLabels = new PlotAxesLabels(
+            //    StringLookup.GetLocalizedString("Label_MuSPrime"),
+            //    StringLookup.GetLocalizedString("Measurement_Inv_mm"),
+            //    new IndependentAxisViewModel
+            //    {
+            //        AxisType = axisType,
+            //        AxisLabel = axisType.GetInternationalizedString(),
+            //        AxisUnits = axisUnits.GetInternationalizedString(),
+            //        AxisRangeVM = WavelengthRangeVM
+            //    });
+            //    WindowViewModel.Current.PlotVM.SetAxesLabels.Execute(axesLabels);
 
-        //    var tissue = SelectedTissue;
-        //    var wavelengths = WavelengthRangeVM.Values.ToArray();
-        //    var points = new Point[wavelengths.Length];
-        //    for (var wvi = 0; wvi < wavelengths.Length; wvi++)
-        //    {
-        //        var wavelength = wavelengths[wvi];
-        //        points[wvi] = new Point(wavelength, tissue.GetMusp(wavelength));
-        //    }
+            var tissue = SelectedTissue;
+            var wavelengths = WavelengthRangeVM.Values.ToArray();
+            var points = new Point[wavelengths.Length];
+            for (var wvi = 0; wvi<wavelengths.Length; wvi++)
+            {
+                var wavelength = wavelengths[wvi];
+                points[wvi] = new Point(wavelength, tissue.GetMusp(wavelength));
+            }
+            PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[] { new PlotData(points, StringLookup.GetLocalizedString("Label_MuSPrimeSpectra")) });
 
-        //    WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] {new PlotData(points, StringLookup.GetLocalizedString("Label_MuSPrimeSpectra"))});
+            //    WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] {new PlotData(points, StringLookup.GetLocalizedString("Label_MuSPrimeSpectra"))});
 
-        //    var minWavelength = WavelengthRangeVM.Values.Min();
-        //    var maxWavelength = WavelengthRangeVM.Values.Max();
-        //    WindowViewModel.Current.TextOutputVM.TextOutput_PostMessage.Execute(
-        //        StringLookup.GetLocalizedString("Message_PlotMuSPrimeSpectrum") + "[" + minWavelength + ", " + maxWavelength + "]\r");
-        //}
+            //    var minWavelength = WavelengthRangeVM.Values.Min();
+            //    var maxWavelength = WavelengthRangeVM.Values.Max();
+            //    WindowViewModel.Current.TextOutputVM.TextOutput_PostMessage.Execute(
+            //        StringLookup.GetLocalizedString("Message_PlotMuSPrimeSpectrum") + "[" + minWavelength + ", " + maxWavelength + "]\r");
+        }
 
         // this may be obsolete because binding of Wavelength updates OPs
         //private void OnUpdateWavelengthCommand()  // used to be (object sender)

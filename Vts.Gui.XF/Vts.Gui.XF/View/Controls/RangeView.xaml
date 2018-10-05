@@ -4,39 +4,43 @@
              x:Class="Vts.Gui.XF.View.RangeView">
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <!-- title -->
             <RowDefinition Height="Auto" />
+            <!-- start/stop/number -->
+            <RowDefinition Height="Auto" />
+            <!-- entry boxes -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0"  Text="{Binding Title}"
                    IsVisible="{Binding ShowTitle}" />
         <StackLayout x:Name="LayoutRoot" Orientation="Horizontal" Grid.Row="1">
             <StackLayout Orientation="Vertical">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="0" Grid.Row="1">
                     <Label Text="{Binding ConverterParameter=Range_Begin, Converter={StaticResource MyResourceToStringConverter}}" />
-                    <Label Text=" [" />
+                    <Label Text="[" />
                     <Label Text="{Binding Units}" />
                     <Label Text="]" />
                 </StackLayout>
-                <Entry Grid.Column="0"  Text="{Binding Start, Mode=TwoWay}" />
+                <Entry Grid.Column="0" Grid.Row="2" Text="{Binding Start, Mode=TwoWay}" />
             </StackLayout>
             <StackLayout Orientation="Vertical">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="1">
-                    <Label Text="{Binding ConverterParameter=Range_End}" />
-                    <Label Text=" [" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="1" Grid.Row="1">
+                    <Label Text="{Binding ConverterParameter=Range_End, Converter={StaticResource MyResourceToStringConverter}}" />
+                    <Label Text="[" />
                     <Label Text="{Binding Units}" />
                     <Label Text="]" />
                 </StackLayout>
-                <Entry Grid.Column="1"  Text="{Binding Stop, Mode=TwoWay}" HorizontalOptions="Center" />
+                <Entry Grid.Column="1" Grid.Row="2" Text="{Binding Stop, Mode=TwoWay}" HorizontalOptions="Center" />
             </StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="Center" Grid.Column="2"
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center" Grid.Column="2" Grid.Row="1"
                         IsVisible="{Binding EnableNumber}">
                 <Label Text="{Binding ConverterParameter=Range_Number, Converter={StaticResource MyResourceToStringConverter}}" />
-                <Entry Grid.Column="2" Text="{Binding Number, Mode=TwoWay}"  />
+                <Entry Grid.Column="2" Grid.Row="2" Text="{Binding Number, Mode=TwoWay}"  />
             </StackLayout>
         </StackLayout>
     </Grid>
