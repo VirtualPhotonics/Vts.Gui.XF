@@ -5,13 +5,13 @@
              xmlns:view="clr-namespace:Vts.Gui.XF.View"
              Title="Spectral Panel:">
     <ScrollView>
-    <Grid x:Name="LayoutRoot">
+    <Grid Padding="30,10,30,0">
         <StackLayout Orientation="Vertical">
-            <Grid>
+            <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400" />
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <!-- Tissue Picker -->
                     <RowDefinition Height="60" />
@@ -30,15 +30,16 @@
                     <!-- multi wavelength section -->
                     <RowDefinition Height="35" />
                     <!-- plot mua button -->
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
                 <!-- Tissue Types  -->
-                <Picker Grid.Column="0" Grid.Row="0" 
+                <Picker Grid.Column="0" Grid.Row="0" HeightRequest="80"
                     Title="{Binding ConverterParameter=Label_TissueTypes, Converter={StaticResource MyResourceToStringConverter}}" 
                     ItemsSource="{Binding Tissues}"
                     SelectedItem="{Binding SelectedTissue, Mode=TwoWay}"
-                    ItemDisplayBinding="{Binding Name}" 
-                    HeightRequest="80"/>
+                    ItemDisplayBinding="{Binding Name}" />
                 <!-- Absorber Concentrations -->
                 <ListView Grid.Column="0" Grid.Row="1"
                     ItemsSource="{Binding SelectedTissue.Absorbers}"
@@ -94,12 +95,11 @@
                 <!--<view:RadioButtonOptionView BindingContext="{Binding ScatteringTypeVM}" />-->
                 <!-- CKH question: can I bypass RadioButtonOptionView - it has many constructs not supported by XF -->
 
-                    <Picker Grid.Column="0" Grid.Row="3" x:Name="scattererPicker"
-                        BindingContext="{Binding ScatteringTypeVM}"
-                        Title="{Binding ConverterParameter=Heading_ScattererType, Converter={StaticResource MyResourceToStringConverter}}" 
-                        ItemsSource="{Binding AllDisplayNames}"
-                        SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"
-                        HeightRequest="50"/>
+                <Picker Grid.Column="0" Grid.Row="3" HeightRequest="50" 
+                    BindingContext="{Binding ScatteringTypeVM}"
+                    Title="{Binding ConverterParameter=Heading_ScattererType, Converter={StaticResource MyResourceToStringConverter}}" 
+                    ItemsSource="{Binding AllDisplayNames}"
+                    SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"/>
                 <!-- Intralipid Scatterer view -->
                 <StackLayout Grid.Column="0" Grid.Row="4"  Orientation="Horizontal" IsVisible="{Binding DisplayIntralipidScatterer}">
                     <Label Text="{Binding ConverterParameter=Value_VolumeFraction, Converter={StaticResource MyResourceToStringConverter}}"  />
@@ -118,22 +118,32 @@
                 </StackLayout>
                 <!-- Mie Scatterer view -->
                 <StackLayout Grid.Column="0" Grid.Row="4" Orientation="Horizontal" IsVisible="{Binding DisplayMieScatterer}">
-                    <Label Text="{Binding ConverterParameter=Value_ParticleRadius, Converter={StaticResource MyResourceToStringConverter}}" />
-                    <Label Text="="/>
-                    <Entry Text="{Binding Scatterer.ParticleRadius, Mode=TwoWay}"
-                           WidthRequest="70"/>
-                    <Label Text="{Binding ConverterParameter=Value_ParticleN, Converter={StaticResource MyResourceToStringConverter}}" />
-                    <Label Text="=" />
-                    <Entry Text="{Binding Scatterer.ParticleRefractiveIndexMismatch, Mode=TwoWay}"
-                           WidthRequest="70"/>
-                    <Label Text="{Binding ConverterParameter=Value_MediumN, Converter={StaticResource MyResourceToStringConverter}}"/>
-                    <Label Text="="  />
-                    <Entry Text="{Binding Scatterer.MediumRefractiveIndexMismatch, Mode=TwoWay}" 
-                           WidthRequest="70"/>
-                    <Label Text="{Binding ConverterParameter=Value_VolumeFraction, Converter={StaticResource MyResourceToStringConverter}}" />
-                    <Label Text="="  />
-                    <Entry Text="{Binding Scatterer.VolumeFraction, Mode=TwoWay}" />
-                    </StackLayout>
+                     <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="70" />
+                            </Grid.ColumnDefinitions>
+                    
+                     <Label Grid.Column="0" Text="{Binding ConverterParameter=Value_ParticleRadius, Converter={StaticResource MyResourceToStringConverter}}"
+                            FontSize="13"/>
+                     <Entry Grid.Column="1" Text="{Binding Scatterer.ParticleRadius, Mode=TwoWay}"/>
+                     <Label Grid.Column="2" Text="{Binding ConverterParameter=Value_ParticleN, Converter={StaticResource MyResourceToStringConverter}}" 
+                            FontSize="13"/>
+                     <Entry Grid.Column="3" Text="{Binding Scatterer.ParticleRefractiveIndexMismatch, Mode=TwoWay}"/>
+                     <Label Grid.Column="4" Text="{Binding ConverterParameter=Value_MediumN, Converter={StaticResource MyResourceToStringConverter}}"
+                            FontSize="13"/>
+                     <Entry Grid.Column="5" Text="{Binding Scatterer.MediumRefractiveIndexMismatch, Mode=TwoWay}" />
+                     <Label Grid.Column="6" Text="{Binding ConverterParameter=Value_VolumeFraction, Converter={StaticResource MyResourceToStringConverter}}" 
+                            FontSize="13"/>
+                     <Entry Grid.Column="7" Text="{Binding Scatterer.VolumeFraction, Mode=TwoWay}" />
+                   </Grid>
+                </StackLayout>
     
                 <!-- Single-λ Calculator -->
                 <Label Grid.Column="0" Grid.Row="5"  
@@ -172,15 +182,19 @@
 
                 <!-- Plot Buttons -->
             <!-- Buttons need to be inside Grid -->
-                <Button Grid.Column="0" Grid.Row="8"  Text="{Binding ConverterParameter=Button_PlotMua, Converter={StaticResource MyResourceToStringConverter}}"
+                    <Button Grid.Column="0" Grid.Row="9"  Text="{Binding ConverterParameter=Button_PlotMua, Converter={StaticResource MyResourceToStringConverter}}"
                         Command="{Binding PlotMuaSpectrumCommand}"
                         Clicked="OnPlotButton_Clicked"
                         VerticalOptions="End"
-                        FontSize="13"/>
+                        FontSize="13" WidthRequest="60"/>
+                    <Button Grid.Column="1" Grid.Row="9"  Text="{Binding ConverterParameter=Button_PlotMusPrime, Converter={StaticResource MyResourceToStringConverter}}"
+                        Command="{Binding PlotMuspSpectrumCommand}"
+                        Clicked="OnPlotButton_Clicked"
+                        VerticalOptions="End"
+                        FontSize="13" WidthRequest="60"/>
 
-
-                <Button Grid.Column="0" 
-                        Grid.Row="9"
+                    <Button Grid.Column="0" 
+                        Grid.Row="10"
                         Clicked="OnPlotButton_Clicked"
                         Text="Plot View"
                         VerticalOptions="End"
