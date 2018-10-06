@@ -3,12 +3,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-//using GalaSoft.MvvmLight.Command;
 using Vts.Common;
-using Vts.Factories;
 using Vts.Gui.XF.Extensions;
 using Vts.Gui.XF.Model;
-using Vts.Gui.XF.View;
 using Vts.SpectralMapping;
 using Xamarin.Forms;
 
@@ -119,14 +116,13 @@ namespace Vts.Gui.XF.ViewModel
             OpticalProperties = new OpticalProperties(0.01, 1, 0.8, 1.4);
             Wavelength = 650;
 
-            //            ResetConcentrations = new RelayCommand<object>(ResetConcentrations_Executed);
+            ResetConcentrationsCommand = new Command<object>(OnResetConcentrationsCommand);
             //UpdateWavelengthCommand = new Command(OnUpdateWavelengthCommand);
-            //PlotMuaSpectrumCommand = new RelayCommand(PlotMuaSpectrum_Executed);
             PlotMuaSpectrumCommand = new Command(async () => await OnPlotMuaSpectrumCommand());
             PlotMuspSpectrumCommand = new Command(async () => await OnPlotMuspSpectrumCommand());
         }
 
-        //public RelayCommand<object> ResetConcentrations { get; set; }
+        public ICommand ResetConcentrationsCommand { get; set; }
         public ICommand UpdateWavelengthCommand { get; set; }
         public ICommand PlotMuaSpectrumCommand { get; set; }
         public ICommand PlotMuspSpectrumCommand { get; set; }
@@ -177,13 +173,9 @@ namespace Vts.Gui.XF.ViewModel
                 ScatteringTypeVM.Options[_selectedTissue.Scatterer.ScattererType].IsSelected = true;
                 ScatteringTypeVM.SelectedValue = _selectedTissue.Scatterer.ScattererType;
 
-                // make sure Scatterer Picker Display name gets updated appropriately when Tissue changes Picker
-                if (ScatteringTypeVM.SelectedValue == ScatteringType.PowerLaw)
-                    ScatteringTypeVM.SelectedDisplayName = ScatteringTypeVM.Options[ScatteringType.PowerLaw].DisplayName;
-                if (ScatteringTypeVM.SelectedValue == ScatteringType.Intralipid)
-                    ScatteringTypeVM.SelectedDisplayName = ScatteringTypeVM.Options[ScatteringType.Intralipid].DisplayName;
-                if (ScatteringTypeVM.SelectedValue == ScatteringType.Mie)
-                    ScatteringTypeVM.SelectedDisplayName = ScatteringTypeVM.Options[ScatteringType.Mie].DisplayName;
+                // make sure Scatterer Picker Display name gets updated appropriately when Tissue Picker changes
+                ScatteringTypeVM.SelectedDisplayName = 
+                    ScatteringTypeVM.Options[ScatteringTypeVM.SelectedValue].DisplayName;
 
                 //ScatteringTypeName = _selectedTissue.Scatterer.GetType().FullName;
 
@@ -334,12 +326,12 @@ namespace Vts.Gui.XF.ViewModel
             //Commands.Spec_UpdateOpticalProperties.Execute(OpticalProperties, null);
         }
 
-        //private void ResetConcentrations_Executed(object obj)
-        //{
-        //    var _tissue = (Tissue)obj;
-        //    _tissue.Absorbers = TissueProvider.CreateAbsorbers(_tissue.TissueType);
-        //    SelectedTissue = _tissue;
-        //}
+        private void OnResetConcentrationsCommand(object obj)
+        {
+            var _tissue = (Tissue)obj;
+            _tissue.Absorbers = TissueProvider.CreateAbsorbers(_tissue.TissueType);
+            SelectedTissue = _tissue;
+        }
 
         async Task OnPlotMuaSpectrumCommand()
         {
