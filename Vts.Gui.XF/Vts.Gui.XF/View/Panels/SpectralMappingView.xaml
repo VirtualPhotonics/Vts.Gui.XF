@@ -85,7 +85,11 @@
                 <Button Grid.Column="0" Grid.Row="2"  Command="{Binding ResetConcentrationsCommand}"
                         CommandParameter="{Binding SelectedTissue}"
                         Text="{Binding ConverterParameter=Button_ResetValues, Converter={StaticResource MyResourceToStringConverter}}"/>
-
+                <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                        <Label Text="{Binding ConverterParameter=Label_PlotLabel, Converter={StaticResource MyResourceToStringConverter}}" />
+                        <Entry Text="{Binding CustomPlotLabel, Mode=TwoWay}" />
+                 </StackLayout>
+                
                 <view:BloodConcentrationView Grid.Column="0" Grid.Row="3"
                     BindingContext="{Binding BloodConcentrationVM}"
                     IsVisible="{Binding DisplayBloodVM}"/>

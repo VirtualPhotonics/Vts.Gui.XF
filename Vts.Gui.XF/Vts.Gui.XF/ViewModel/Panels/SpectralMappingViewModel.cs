@@ -34,6 +34,7 @@ namespace Vts.Gui.XF.ViewModel
         private bool _displayIntralipidScatterer;
         private bool _displayPowerLawScatterer;
         private bool _displayMieScatterer;
+        private string _CustomPlotLabel;
 
         public SpectralMappingViewModel()
         {
@@ -115,7 +116,7 @@ namespace Vts.Gui.XF.ViewModel
             //ScatteringTypeName = SelectedTissue.GetType().FullName;
             OpticalProperties = new OpticalProperties(0.01, 1, 0.8, 1.4);
             Wavelength = 650;
-
+            CustomPlotLabel = "";
             ResetConcentrationsCommand = new Command<object>(OnResetConcentrationsCommand);
             //UpdateWavelengthCommand = new Command(OnUpdateWavelengthCommand);
             PlotMuaSpectrumCommand = new Command(async () => await OnPlotMuaSpectrumCommand());
@@ -266,6 +267,16 @@ namespace Vts.Gui.XF.ViewModel
                 OnPropertyChanged("N");
             }
         }
+
+        public string CustomPlotLabel
+        {
+            get { return _CustomPlotLabel; }
+            set
+            {
+                _CustomPlotLabel = value;
+                OnPropertyChanged("CustomPlotLabel");
+            }
+        }
         public bool DisplayIntralipidScatterer
         {
             get { return _displayIntralipidScatterer; }
@@ -361,7 +372,16 @@ namespace Vts.Gui.XF.ViewModel
                 points[wvi] = new Point(wavelength, tissue.GetMua(wavelength));
             }
             //WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] { new PlotData(points, StringLookup.GetLocalizedString("Label_MuASpectra")) });
-            PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[] { new PlotData(points, StringLookup.GetLocalizedString("Label_MuASpectra")) });
+            if (CustomPlotLabel == "")
+            {
+                PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[] 
+                    { new PlotData(points, StringLookup.GetLocalizedString("Label_MuASpectra")) });
+            }
+            else
+            {
+                PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[]
+                    {new PlotData(points, CustomPlotLabel)});
+            }
 
             //var minWavelength = WavelengthRangeVM.Values.Min();
             //var maxWavelength = WavelengthRangeVM.Values.Max();
@@ -388,14 +408,23 @@ namespace Vts.Gui.XF.ViewModel
             var tissue = SelectedTissue;
             var wavelengths = WavelengthRangeVM.Values.ToArray();
             var points = new Point[wavelengths.Length];
-            for (var wvi = 0; wvi<wavelengths.Length; wvi++)
+            for (var wvi = 0; wvi < wavelengths.Length; wvi++)
             {
                 var wavelength = wavelengths[wvi];
                 points[wvi] = new Point(wavelength, tissue.GetMusp(wavelength));
             }
-            PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[] { new PlotData(points, StringLookup.GetLocalizedString("Label_MuSPrimeSpectra")) });
 
-            //    WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] {new PlotData(points, StringLookup.GetLocalizedString("Label_MuSPrimeSpectra"))});
+            if (CustomPlotLabel == "")
+            {
+                PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[]
+                    {new PlotData(points, StringLookup.GetLocalizedString("Label_MuSPrimeSpectra"))});
+            }
+            else
+            {
+                PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[]
+                    {new PlotData(points, CustomPlotLabel)});
+            }
+        //    WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] {new PlotData(points, StringLookup.GetLocalizedString("Label_MuSPrimeSpectra"))});
 
             //    var minWavelength = WavelengthRangeVM.Values.Min();
             //    var maxWavelength = WavelengthRangeVM.Values.Max();
