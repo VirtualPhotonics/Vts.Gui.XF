@@ -61,16 +61,17 @@
                         BindingContext="{Binding PlotNormalizationTypeOptionVM}"
                         Title="{Binding ConverterParameter=Label_Normalization, Converter={StaticResource MyResourceToStringConverter}}" 
                         ItemsSource="{Binding AllDisplayNames}"
-                        SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"
+                        SelectedIndex="{Binding SelectedIndex}"
                         HeightRequest="60"/>
-
-                <Picker x:Name="ToggleTypePicker"
-                        IsVisible="{Binding ShowComplexPlotToggle, Mode=TwoWay}"
-                        BindingContext="{Binding PlotToggleTypeOptionVM}"
-                        Title="{Binding ConverterParameter=Label_PlotToggle, Converter={StaticResource MyResourceToStringConverter}}" 
-                        ItemsSource="{Binding AllDisplayNames}"
-                        SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"
-                        HeightRequest="60"/>
+                <StackLayout IsVisible="{Binding ShowComplexPlotToggle, Mode=TwoWay}">
+                    <Picker x:Name="ToggleTypePicker"
+                            BindingContext="{Binding PlotToggleTypeOptionVM}"
+                            Title="{Binding ConverterParameter=Label_PlotToggle, Converter={StaticResource MyResourceToStringConverter}}" 
+                            ItemsSource="{Binding AllDisplayNames}"
+                            SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"
+                            SelectedIndex="{Binding SelectedValue, Mode=TwoWay}"
+                            HeightRequest="60"/>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

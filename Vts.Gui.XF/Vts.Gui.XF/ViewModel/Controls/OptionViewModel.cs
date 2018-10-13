@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Vts.Gui.XF.ViewModel
         private Dictionary<TValue, OptionModel<TValue>> _Options;
         private string _SelectedDisplayName;
         private string[] _selectedDisplayNames;
+        private int _selectedIndex;
         private TValue _SelectedValue;
         private TValue[] _selectedValues;
         private bool _ShowTitle;
@@ -72,6 +74,23 @@ namespace Vts.Gui.XF.ViewModel
         public OptionViewModel(string groupName)
             : this(groupName, true, default(TValue), null)
         {
+        }
+
+        public int SelectedIndex
+        {
+            get
+            {
+                return _selectedIndex;
+            }
+            set
+            {
+                _selectedIndex = value;
+                if (AllValues != null)
+                {
+                    SelectedValue = AllValues[value];
+                }
+                OnPropertyChanged("SelectedIndex");
+            }
         }
 
         public TValue SelectedValue
@@ -198,6 +217,7 @@ namespace Vts.Gui.XF.ViewModel
             if (option.IsSelected)
             {
                 SelectedValue = option.Value;
+                SelectedIndex = option.ID;
                 SelectedDisplayName = option.DisplayName;
             }
 
