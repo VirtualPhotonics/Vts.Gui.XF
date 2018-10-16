@@ -187,6 +187,11 @@
                         Clicked="OnPlotButton_Clicked"
                         VerticalOptions="End"
                         FontSize="13" WidthRequest="150"/>
+                        <Button Text="View Plot"
+                         Clicked="OnPlotButton_Clicked"
+                         VerticalOptions="End"
+                         FontSize="13" WidthRequest="150"/>
+
                     </StackLayout>
                 </Grid>
             </StackLayout>
