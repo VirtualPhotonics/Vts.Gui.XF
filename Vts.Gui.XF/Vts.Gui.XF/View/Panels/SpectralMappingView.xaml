@@ -12,11 +12,11 @@
                         <!-- Tissue Picker -->
                         <RowDefinition Height="60" />
                         <!-- Absorber Conc section -->
-                        <RowDefinition Height="180" />
+                        <RowDefinition Height="Auto" />
                         <!-- reset button -->
                         <RowDefinition Height="35" />
                         <!-- Blood Conc section -->
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
                         <!-- Scat Type Picker -->
                         <RowDefinition Height="60" />
                         <!-- Scat Data section -->
@@ -38,7 +38,7 @@
                     SelectedItem="{Binding SelectedTissue, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding Name}" />
                     <!-- Absorber Concentrations -->
-                    <ListView Grid.Column="0" Grid.Row="1"
+                    <ListView Grid.Column="0" Grid.Row="1" HasUnevenRows="True" HeightRequest="180"
                     ItemsSource="{Binding SelectedTissue.Absorbers}"
                     VerticalOptions="FillAndExpand"
                     IsPullToRefreshEnabled="true"
