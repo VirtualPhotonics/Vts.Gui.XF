@@ -5,6 +5,9 @@ using Xamarin.Forms;
 
 namespace Vts.Gui.XF.View
 {
+    /// <summary>
+    /// CURRENTLY THIS CLASS IS OBSOLETE INSTEAD ISVISIBLE IS BEING USED
+    /// </summary>
     public class ScatteringTemplateSelector : DataTemplateSelector
     {
         //public static readonly DependencyProperty ScatteringTypeProperty = DependencyProperty.Register(
