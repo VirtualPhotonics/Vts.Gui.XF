@@ -93,7 +93,8 @@
                     BindingContext="{Binding ScatteringTypeVM}"
                     Title="{Binding ConverterParameter=Heading_ScattererType, Converter={StaticResource MyResourceToStringConverter}}" 
                     ItemsSource="{Binding AllDisplayNames}"
-                    SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"/>
+                            SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"/>
+                    <!--SelectedItem="{Binding SelectedDisplayName, Mode=TwoWay}"/>-->
                     <!-- Intralipid Scatterer view -->
                     <StackLayout Grid.Row="5"  Orientation="Horizontal" IsVisible="{Binding DisplayIntralipidScatterer}">
                         <Label Text="{Binding ConverterParameter=Value_VolumeFraction, Converter={StaticResource MyResourceToStringConverter}}"  />

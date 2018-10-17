@@ -64,18 +64,18 @@ namespace Vts.Gui.XF.ViewModel
                     DisplayPowerLawScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.PowerLaw;
                     DisplayMieScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Mie;
                 }
-                if (args.PropertyName == "SelectedDisplayName") // this runs based on Picker changes
-                {
-                    if (ScatteringTypeVM.SelectedDisplayName.Contains("Power"))
-                        ScatteringTypeVM.SelectedValue = ScatteringType.PowerLaw;
-                    if (ScatteringTypeVM.SelectedDisplayName.Contains("Intralipid"))
-                        ScatteringTypeVM.SelectedValue = ScatteringType.Intralipid;
-                    if (ScatteringTypeVM.SelectedDisplayName.Contains("Mie"))
-                        ScatteringTypeVM.SelectedValue = ScatteringType.Mie;
-                    DisplayIntralipidScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Intralipid;
-                    DisplayPowerLawScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.PowerLaw;
-                    DisplayMieScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Mie;
-                }
+                //if (args.PropertyName == "SelectedDisplayName") // this runs based on Picker changes
+                //{
+                //    if (ScatteringTypeVM.SelectedDisplayName.Contains("Power"))
+                //        ScatteringTypeVM.SelectedValue = ScatteringType.PowerLaw;
+                //    if (ScatteringTypeVM.SelectedDisplayName.Contains("Intralipid"))
+                //        ScatteringTypeVM.SelectedValue = ScatteringType.Intralipid;
+                //    if (ScatteringTypeVM.SelectedDisplayName.Contains("Mie"))
+                //        ScatteringTypeVM.SelectedValue = ScatteringType.Mie;
+                //    DisplayIntralipidScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Intralipid;
+                //    DisplayPowerLawScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.PowerLaw;
+                //    DisplayMieScatterer = ScatteringTypeVM.SelectedValue == ScatteringType.Mie;
+                //}
 
                 OnPropertyChanged("Scatterer");
                 UpdateOpticalProperties();
@@ -172,11 +172,12 @@ namespace Vts.Gui.XF.ViewModel
                 OnPropertyChanged("Scatterer");
 
                 ScatteringTypeVM.Options[_selectedTissue.Scatterer.ScattererType].IsSelected = true;
-                ScatteringTypeVM.SelectedValue = _selectedTissue.Scatterer.ScattererType;
+                //ScatteringTypeVM.SelectedValue = _selectedTissue.Scatterer.ScattererType;
+                ScatteringTypeVM.SelectedIndex = (int)_selectedTissue.Scatterer.ScattererType;
 
                 // make sure Scatterer Picker Display name gets updated appropriately when Tissue Picker changes
-                ScatteringTypeVM.SelectedDisplayName = 
-                    ScatteringTypeVM.Options[ScatteringTypeVM.SelectedValue].DisplayName;
+                //ScatteringTypeVM.SelectedDisplayName = 
+                //    ScatteringTypeVM.Options[ScatteringTypeVM.SelectedValue].DisplayName;
 
                 //ScatteringTypeName = _selectedTissue.Scatterer.GetType().FullName;
 

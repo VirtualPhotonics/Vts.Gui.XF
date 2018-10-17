@@ -7,24 +7,24 @@ using Vts.Gui.XF.Model;
 
 namespace Vts.Gui.XF.ViewModel
 {
-    // todo: consider refactoring to derive from ObservableCollection:
-    // http://www.thejoyofcode.com/ViewModels_and_CheckListBoxes.aspx
-
     /// <summary>
-    ///     View model exposing Enum choices with change notification
+    /// View model exposing Enum choices with change notification.
+    /// Xamarin Forms does not allow xaml to bind to Generic Types (e.g. Tvalue) so
+    /// SelectedIndex has been added to bind to in the xaml.
+    /// 
     /// </summary>
     public class OptionViewModel<TValue> : BindableObject
     {
         private bool _enableMultiSelect;
-        private string _GroupName;
-        private Dictionary<TValue, OptionModel<TValue>> _Options;
-        private string _SelectedDisplayName;
+        private string _groupName;
+        private Dictionary<TValue, OptionModel<TValue>> _options;
+        private string _selectedDisplayName;
         private string[] _selectedDisplayNames;
         private int _selectedIndex;
-        private TValue _SelectedValue;
+        private TValue _selectedValue;
         private int[] _selectedIndexes;
         private TValue[] _selectedValues;
-        private bool _ShowTitle;
+        private bool _showTitle;
         private string[] _unSelectedDisplayNames;
         private int[] _unSelectedIndexes;
         private TValue[] _unSelectedValues;
@@ -94,40 +94,40 @@ namespace Vts.Gui.XF.ViewModel
 
         public TValue SelectedValue
         {
-            get { return _SelectedValue; }
+            get { return _selectedValue; }
             set
             {
-                _SelectedValue = value;
+                _selectedValue = value;
                 OnPropertyChanged("SelectedValue");
             }
         }
 
         public string SelectedDisplayName
         {
-            get { return _SelectedDisplayName; }
+            get { return _selectedDisplayName; }
             set
             {
-                _SelectedDisplayName = value;
+                _selectedDisplayName = value;
                 OnPropertyChanged("SelectedDisplayName");
             }
         }
 
         public bool ShowTitle
         {
-            get { return _ShowTitle; }
+            get { return _showTitle; }
             set
             {
-                _ShowTitle = value;
+                _showTitle = value;
                 OnPropertyChanged("ShowTitle");
             }
         }
 
         public string GroupName
         {
-            get { return _GroupName; }
+            get { return _groupName; }
             set
             {
-                _GroupName = value;
+                _groupName = value;
                 OnPropertyChanged("GroupName");
             }
         }
@@ -226,10 +226,10 @@ namespace Vts.Gui.XF.ViewModel
 
         public Dictionary<TValue, OptionModel<TValue>> Options
         {
-            get { return _Options; }
+            get { return _options; }
             set
             {
-                _Options = value;
+                _options = value;
                 OnPropertyChanged("Options");
             }
         }
@@ -250,7 +250,7 @@ namespace Vts.Gui.XF.ViewModel
             {
                 var MIN_CHOICES = 1;
                 var MAX_CHOICES = 2;
-                var numSelected = (from o in _Options where o.Value.IsSelected select o).Count();
+                var numSelected = (from o in _options where o.Value.IsSelected select o).Count();
 
                 // disable the unselected choices beyond a MAX_CHOICES number of concurrent multi-select options
                 Options.Where(o => !o.Value.IsSelected).ForEach(o => o.Value.IsEnabled = numSelected < MAX_CHOICES);
@@ -262,12 +262,12 @@ namespace Vts.Gui.XF.ViewModel
 
         private void UpdateOptionsNamesAndValues()
         {
-            if (_Options == null)
+            if (_options == null)
                 return;
 
             // todo: created these in parallel with SelectedValue, so as not to break other code. need to merge functionality across codebase to use SelectedValues
-            var selectedOptions = (from o in _Options where o.Value.IsSelected select o).ToArray();
-            var unSelectedOptions = (from o in _Options where !o.Value.IsSelected select o).ToArray();
+            var selectedOptions = (from o in _options where o.Value.IsSelected select o).ToArray();
+            var unSelectedOptions = (from o in _options where !o.Value.IsSelected select o).ToArray();
 
             // update arrays and explicitly fire property changed, so we don't trip on intermediate changes 
             _selectedValues = selectedOptions.Select(item => item.Value.Value).ToArray();
