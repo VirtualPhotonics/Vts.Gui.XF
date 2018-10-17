@@ -22,13 +22,12 @@ namespace Vts.Gui.XF.ViewModel
         private string[] _selectedDisplayNames;
         private int _selectedIndex;
         private TValue _SelectedValue;
+        private int[] _selectedIndexes;
         private TValue[] _selectedValues;
         private bool _ShowTitle;
         private string[] _unSelectedDisplayNames;
+        private int[] _unSelectedIndexes;
         private TValue[] _unSelectedValues;
-        // CKH: added following to allow dynamic xaml
-        private string[] _allDisplayNames;
-        private TValue[] _allValues;
 
         public OptionViewModel(string groupName, bool showTitle, TValue initialValue, TValue[] allValues,
             bool enableMultiSelect = false)
@@ -143,6 +142,25 @@ namespace Vts.Gui.XF.ViewModel
             }
         }
 
+        public int[] SelectedIndexes
+        {
+            get { return _selectedIndexes; }
+            set
+            {
+                _selectedIndexes = value;
+                if (AllValues != null)
+                {
+                    var i = 0;
+                    foreach (var index in _selectedIndexes)
+                    {
+                        SelectedValues[i] = AllValues[index];
+                        i++;
+                    }
+                }
+                OnPropertyChanged("SelectedIndexes");
+            }
+        }
+
         // todo: created this in parallel with SelectedValue, so as not to break other code. need to merge functionality across codebase to use this version
         public TValue[] SelectedValues
         {
@@ -161,6 +179,25 @@ namespace Vts.Gui.XF.ViewModel
             {
                 _selectedDisplayNames = value;
                 OnPropertyChanged("SelectedDisplayNames");
+            }
+        }
+
+        public int[] UnSelectedIndexes
+        {
+            get { return _unSelectedIndexes; }
+            set
+            {
+                _unSelectedIndexes = value;
+                if (AllValues != null)
+                {
+                    var i = 0;
+                    foreach (var index in _unSelectedIndexes)
+                    {
+                        UnSelectedValues[i] = AllValues[index];
+                        i++;
+                    }
+                }
+                OnPropertyChanged("UnSelectedIndexes");
             }
         }
 
@@ -184,22 +221,8 @@ namespace Vts.Gui.XF.ViewModel
             }
         }
         // CKH: AllDisplayNames added to support used of picker since no dynamic xaml available in XF
-        public string[] AllDisplayNames
-        {
-            get { return _allDisplayNames; }
-            set
-            {
-                _allDisplayNames = value;
-            }
-        }
-        public TValue[] AllValues
-        {
-            get { return _allValues; }
-            set
-            {
-                _allValues = value;
-            }
-        }
+        public string[] AllDisplayNames { get; set; }
+        public TValue[] AllValues { get; set; }
 
         public Dictionary<TValue, OptionModel<TValue>> Options
         {
@@ -251,8 +274,8 @@ namespace Vts.Gui.XF.ViewModel
             _selectedDisplayNames = selectedOptions.Select(item => item.Value.DisplayName).ToArray();
             _unSelectedValues = unSelectedOptions.Select(item => item.Value.Value).ToArray();
             _unSelectedDisplayNames = unSelectedOptions.Select(item => item.Value.DisplayName).ToArray();
-            _allDisplayNames = _selectedDisplayNames.Concat(_unSelectedDisplayNames).ToArray();
-            _allValues = _selectedValues.Concat(_unSelectedValues).ToArray();
+            AllDisplayNames = _selectedDisplayNames.Concat(_unSelectedDisplayNames).ToArray();
+            AllValues = _selectedValues.Concat(_unSelectedValues).ToArray();
             OnPropertyChanged("SelectedValues");
             OnPropertyChanged("SelectedDisplayNames");
             OnPropertyChanged("UnSelectedValues");
