@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Vts.Gui.XF.View.SpectralMappingView"
              xmlns:view="clr-namespace:Vts.Gui.XF.View"
-             Title="Spectral Panel:">
+             Title="Spectral Panel">
     <ScrollView>
         <Grid Padding="30,10,30,0">
             <StackLayout Orientation="Vertical">
@@ -188,11 +188,6 @@
                         Clicked="OnPlotButton_Clicked"
                         VerticalOptions="End"
                         FontSize="13" WidthRequest="150"/>
-                        <Button Text="View Plot"
-                         Clicked="OnPlotButton_Clicked"
-                         VerticalOptions="End"
-                         FontSize="13" WidthRequest="150"/>
-
                     </StackLayout>
                 </Grid>
             </StackLayout>

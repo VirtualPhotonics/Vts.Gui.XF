@@ -31,7 +31,8 @@ namespace Vts.Gui.XF.View
                 return;
             if (panel.Name == "Spectral Panel")
             {
-                await Navigation.PushAsync(new SpectralMappingView());
+                //await Navigation.PushAsync(new SpectralMappingView());
+                await Navigation.PushAsync(new TabbedSpectralAndPlotPages());
             }
 
            // Manually deselect item.

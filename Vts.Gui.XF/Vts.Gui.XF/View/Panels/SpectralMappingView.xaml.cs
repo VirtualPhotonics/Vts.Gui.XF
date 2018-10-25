@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Vts.Gui.XF.View;
 using Vts.Gui.XF.ViewModel;
 
 namespace Vts.Gui.XF.View
