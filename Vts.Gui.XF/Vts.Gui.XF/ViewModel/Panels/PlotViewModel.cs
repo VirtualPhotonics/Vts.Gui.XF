@@ -61,8 +61,8 @@ namespace Vts.Gui.XF.ViewModel
     /// </summary>
     public class PlotViewModel : BindableObject,INotifyPropertyChanged
     {
-        private bool _AutoScaleX;
-        private bool _AutoScaleY;
+        private bool _manualScaleX;
+        private bool _manualScaleY;
         private IndependentVariableAxis _CurrentIndependentVariableAxis;
         private string _CustomPlotLabel;
 
@@ -98,8 +98,8 @@ namespace Vts.Gui.XF.ViewModel
             _maxYValue = MaxY = 1.0;
             _minXValue = MinX = 1E-9;
             _maxXValue = MaxX = 1.0;
-            _AutoScaleX = true;
-            _AutoScaleY = true;
+            _manualScaleX = false;
+            _manualScaleY = false;
 
             RealLabels = new List<string>();
             ImagLabels = new List<string>();
@@ -370,47 +370,23 @@ namespace Vts.Gui.XF.ViewModel
             }
         }
 
-        public bool AutoScaleX
-        {
-            get { return _AutoScaleX; }
-            set
-            {
-                _AutoScaleX = value;
-                OnPropertyChanged("AutoScaleX");
-                OnPropertyChanged("ManualScaleX");
-            }
-        }
-
-        public bool AutoScaleY
-        {
-            get { return _AutoScaleY; }
-            set
-            {
-                _AutoScaleY = value;
-                OnPropertyChanged("AutoScaleY");
-                OnPropertyChanged("ManualScaleY");
-            }
-        }
-
         public bool ManualScaleX
         {
-            get { return !_AutoScaleX; }
+            get { return _manualScaleX; }
             set
             {
-                _AutoScaleX = !value;
+                _manualScaleX = value;
                 OnPropertyChanged("ManualScaleX");
-                OnPropertyChanged("AutoScaleX");
             }
         }
 
         public bool ManualScaleY
         {
-            get { return !_AutoScaleY; }
+            get { return _manualScaleY; }
             set
             {
-                _AutoScaleY = !value;
+                _manualScaleY = value;
                 OnPropertyChanged("ManualScaleY");
-                OnPropertyChanged("AutoScaleY");
             }
         }
 
@@ -488,8 +464,8 @@ namespace Vts.Gui.XF.ViewModel
             output._maxYValue = plotToClone._maxYValue;
             output._minXValue = plotToClone._minXValue;
             output._maxXValue = plotToClone._maxXValue;
-            output._AutoScaleX = plotToClone._AutoScaleX;
-            output._AutoScaleY = plotToClone._AutoScaleY;
+            output._manualScaleX = plotToClone._manualScaleX;
+            output._manualScaleY = plotToClone._manualScaleY;
             output._IsComplexPlot = plotToClone._IsComplexPlot;
             output._CurrentIndependentVariableAxis = plotToClone._CurrentIndependentVariableAxis;
 
@@ -683,14 +659,19 @@ namespace Vts.Gui.XF.ViewModel
         private void CalculateMinMax()
         {
             // get min and max values for reference
-            if (!AutoScaleX && !AutoScaleY) return;
-            MinX = double.PositiveInfinity;
-            MaxX = double.NegativeInfinity;
-            MinY = double.PositiveInfinity;
-            MaxY = double.NegativeInfinity;
+            if (!ManualScaleX)
+            {
+                MinX = double.PositiveInfinity;
+                MaxX = double.NegativeInfinity;
+            }
+            if (!ManualScaleY)
+            {
+                MinY = double.PositiveInfinity;
+                MaxY = double.NegativeInfinity;
+            }
             foreach (var point in PlotModel.Series.Cast<LineSeries>().SelectMany(series => series.Points))
             {
-                if (AutoScaleX)
+                if (!ManualScaleX)
                 {
                     if (point.X > MaxX)
                     {
@@ -701,7 +682,7 @@ namespace Vts.Gui.XF.ViewModel
                         MinX = point.X;
                     }
                 }
-                if (!AutoScaleY) continue;
+                if (ManualScaleY) continue;
                 if (point.Y > MaxY)
                 {
                     MaxY = point.Y;
@@ -711,13 +692,13 @@ namespace Vts.Gui.XF.ViewModel
                     MinY = point.Y;
                 }
             }
-            if (AutoScaleX)
+            if (!ManualScaleX)
             {
                 MinXValue = MinX;
                 MaxXValue = MaxX;
                 StepX = (MaxX - MinX) / 10;
             }
-            if (!AutoScaleY) return;
+            if (ManualScaleY) return;
             MinYValue = MinY;
             MaxYValue = MaxY;
             StepY = (MaxY - MinY) / 10;
@@ -728,8 +709,8 @@ namespace Vts.Gui.XF.ViewModel
             // function to filter the results if we're not auto-scaling
             Func<DataPoint, bool> isWithinAxes =
                 p =>
-                    (AutoScaleX || (p.X <= MaxXValue && p.X >= MinXValue)) &&
-                    (AutoScaleY || (p.Y <= MaxYValue && p.Y >= MinYValue));
+                    (!ManualScaleX || (p.X <= MaxXValue && p.X >= MinXValue)) &&
+                    (!ManualScaleY || (p.Y <= MaxYValue && p.Y >= MinYValue));
 
             // function to filter out any invalid data points
             Func<DataPoint, bool> isValidDataPoint =
