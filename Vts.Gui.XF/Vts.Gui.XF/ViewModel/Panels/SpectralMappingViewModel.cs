@@ -366,7 +366,7 @@ namespace Vts.Gui.XF.ViewModel
             else
             {
                 PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[]
-                    {new PlotData(points, CustomPlotLabel)});
+                    {new PlotData(points, "[" + CustomPlotLabel + "] " + StringLookup.GetLocalizedString("Label_MuASpectra"))});
             }
 
             //var minWavelength = WavelengthRangeVM.Values.Min();
@@ -408,7 +408,7 @@ namespace Vts.Gui.XF.ViewModel
             else
             {
                 PanelsListViewModel.Current.PlotVM.PlotValuesCommand.Execute(new[]
-                    {new PlotData(points, CustomPlotLabel)});
+                    {new PlotData(points, "[" + CustomPlotLabel + "] " + StringLookup.GetLocalizedString("Label_MuSPrimeSpectra"))});
             }
         //    WindowViewModel.Current.PlotVM.PlotValues.Execute(new[] {new PlotData(points, StringLookup.GetLocalizedString("Label_MuSPrimeSpectra"))});
 

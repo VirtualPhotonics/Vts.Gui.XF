@@ -148,8 +148,6 @@ namespace Vts.Gui.XF.ViewModel
                 new OptionViewModel<PlotNormalizationType>("NormalizationType_" + _plotViewId, false);
             PlotNormalizationTypeOptionVM.PropertyChanged += (sender, args) => UpdatePlotSeries();
 
-            CustomPlotLabel = "";
-
             //Commands.Plot_PlotValues.Executed += Plot_Executed;
             //Commands.Plot_SetAxesLabels.Executed += Plot_SetAxesLabels_Executed;
 
@@ -340,16 +338,6 @@ namespace Vts.Gui.XF.ViewModel
             }
         }
 
-        public string CustomPlotLabel
-        {
-            get { return _CustomPlotLabel; }
-            set
-            {
-                _CustomPlotLabel = value;
-                OnPropertyChanged("CustomPlotLabel");
-            }
-        }
-
         public IList<string> Labels
         {
             get { return _Labels; }
@@ -456,7 +444,6 @@ namespace Vts.Gui.XF.ViewModel
             output._HoldOn = plotToClone._HoldOn;
             output._PlotSeriesCollection = new PlotPointCollection();
             output._Labels = plotToClone._Labels.ToList();
-            output._CustomPlotLabel = plotToClone._CustomPlotLabel;
             output.ShowInPlotView = false;
             output._HideKey = plotToClone.HideKey;
             output._ShowAxes = plotToClone._ShowAxes;
@@ -611,14 +598,13 @@ namespace Vts.Gui.XF.ViewModel
             {
                 ClearPlot();
             }
-
-            var customLabel = CustomPlotLabel.Length > 0 ? "[" + CustomPlotLabel + "] " : "";
+            
             foreach (var t in plotData)
             {
                 var points = t.Points;
-                var title = customLabel + t.Title;
+                var title = t.Title;
 
-                Labels.Add(title + customLabel);
+                Labels.Add(title);
                 DataSeriesCollection.Add(new DataPointCollection
                 {
                     DataPoints = points,
