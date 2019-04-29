@@ -296,7 +296,7 @@ namespace Vts.Gui.XF.ViewModel
             set
             {
                 _yAxisLog10 = value;
-                OnPropertyChanged("XAxisLog10");
+                OnPropertyChanged("YAxisLog10");
                 UpdatePlotSeries();
             }
         }

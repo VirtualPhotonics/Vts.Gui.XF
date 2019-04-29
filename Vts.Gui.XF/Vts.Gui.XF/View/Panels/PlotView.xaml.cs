@@ -1,5 +1,4 @@
 ﻿using System;
-using Vts.Gui.XF.View.Panels.SubPanels;
 using Vts.Gui.XF.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,9 +15,10 @@ namespace Vts.Gui.XF.View
             BindingContext = viewModel = PanelsListViewModel.Current.PlotVM;
         }
 
-        async void OnSettingsButton_Clicked(object sender, EventArgs args)
+        private void OnSettingsButton_Clicked(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new PlotViewSettings());
+            var tabbedPage = Parent as TabbedPage;
+            tabbedPage.CurrentPage = tabbedPage.Children[2];
         }
     }
 }

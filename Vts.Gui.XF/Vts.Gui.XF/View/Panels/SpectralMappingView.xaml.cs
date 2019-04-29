@@ -13,10 +13,19 @@ namespace Vts.Gui.XF.View
         public SpectralMappingView()
         {
             InitializeComponent();
-
             BindingContext = viewModel = PanelsListViewModel.Current.SpectralMappingVM;
-
         }
+
+        override protected void OnAppearing()
+        {
+            var tabbedPage = Parent as TabbedPage;
+            if (PanelsListViewModel.Current.PlotVM.PlotSeriesCollection.Count > 0 && tabbedPage.Children.Count == 1)
+            {
+                tabbedPage.Children.Add(new PlotView());
+                tabbedPage.Children.Add(new PlotViewSettings());
+            }
+        }
+
         private void SetSectionVisibility(StackLayout section, bool isVisible)
         {
             // found following solution on web:
@@ -24,10 +33,18 @@ namespace Vts.Gui.XF.View
             // basically sets height of stackLayout = 0 equiv to isVisible=false, =-1 equiv to isVisible=true 
             section.HeightRequest = isVisible ? -1d : 0;
         }
-        async void OnPlotButton_Clicked(object sender, EventArgs args)
+        private void OnPlotButton_Clicked(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new PlotView());
+            var tabbedPage = Parent as TabbedPage;
+            if (tabbedPage.Children.Count == 1)
+            {
+                // if the plot tab has not been created, create it here
+                tabbedPage.Children.Add(new PlotView());
+                tabbedPage.Children.Add(new PlotViewSettings());
+            }
+            tabbedPage.CurrentPage = tabbedPage.Children[1];
         }
+
         //async void OnUpdateWavelengthButton_Clicked(object sender, EventArgs args)
         //{
         //    await this.viewModel.UpdateWavelengthCommand(sender);

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
-             x:Class="Vts.Gui.XF.View.Panels.SubPanels.PlotViewSettings"
+             x:Class="Vts.Gui.XF.View.PlotViewSettings"
              Title="Settings">
     <ContentPage.Content>
         <ScrollView>

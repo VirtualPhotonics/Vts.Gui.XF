@@ -4,7 +4,6 @@
             xmlns:view="clr-namespace:Vts.Gui.XF.View"
             x:Class="Vts.Gui.XF.View.TabbedSpectralAndPlotPages"
             BarBackgroundColor="LightGray">
-  <!--Pages can be added as references or inline-->
-  <view:SpectralMappingView />
-  <view:PlotView />
+    <!--Pages can be added as references or inline-->
+    <view:SpectralMappingView />
 </TabbedPage>
