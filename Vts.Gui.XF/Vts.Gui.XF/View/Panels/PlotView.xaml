@@ -6,9 +6,9 @@
              Title="Plots">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="Assets/cogs.png" Clicked="OnSettingsButton_Clicked"/>
-        <ToolbarItem Text="Clear Newest" Command="{Binding ClearPlotSingleCommand}"/>
-        <ToolbarItem Text="Clear All" Command="{Binding ClearPlotCommand}"/>
+        <ToolbarItem Icon="Assets/cogs.png" Text="Settings" Clicked="OnSettingsButton_Clicked"/>
+        <ToolbarItem Icon="Assets/ClearNewest.png" Text="Clear Newest" Command="{Binding ClearPlotSingleCommand}"/>
+        <ToolbarItem Icon="Assets/ClearAll.png" Text="Clear All" Command="{Binding ClearPlotCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
