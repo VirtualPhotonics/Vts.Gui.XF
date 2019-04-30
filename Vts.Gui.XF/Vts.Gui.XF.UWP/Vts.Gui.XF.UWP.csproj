@@ -113,6 +113,8 @@
     <Content Include="Assets\ClearAll.png" />
     <Content Include="Assets\ClearNewest.png" />
     <Content Include="Assets\cogs.png" />
+    <Content Include="Assets\KeyOff.png" />
+    <Content Include="Assets\KeyOn.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />

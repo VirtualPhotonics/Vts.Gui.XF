@@ -9,6 +9,7 @@
         <ToolbarItem Icon="Assets/cogs.png" Text="Settings" Clicked="OnSettingsButton_Clicked"/>
         <ToolbarItem Icon="Assets/ClearNewest.png" Text="Clear Newest" Command="{Binding ClearPlotSingleCommand}"/>
         <ToolbarItem Icon="Assets/ClearAll.png" Text="Clear All" Command="{Binding ClearPlotCommand}"/>
+        <ToolbarItem Icon="{Binding CurrentKeyImage}" Text="Show/Hide Key"  Clicked="OnKeyButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>

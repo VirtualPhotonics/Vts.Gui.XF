@@ -20,5 +20,9 @@ namespace Vts.Gui.XF.View
             var tabbedPage = Parent as TabbedPage;
             tabbedPage.CurrentPage = tabbedPage.Children[2];
         }
+        private void OnKeyButton_Clicked(object sender, EventArgs args)
+        {
+            viewModel.HideKey = !viewModel.HideKey;
+        }
     }
 }

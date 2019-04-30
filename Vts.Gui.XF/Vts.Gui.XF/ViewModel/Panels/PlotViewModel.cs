@@ -245,7 +245,23 @@ namespace Vts.Gui.XF.ViewModel
             {
                 _HideKey = value;
                 OnPropertyChanged("HideKey");
+                OnPropertyChanged("CurrentKeyImage");
                 UpdatePlotSeries();
+            }
+        }
+
+        public string CurrentKeyImage
+        {
+            get
+            {
+                if (HideKey)
+                {
+                    return "Assets/KeyOff.png";
+                }
+                else
+                {
+                    return "Assets/KeyOn.png";
+                }
             }
         }
 
